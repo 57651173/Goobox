@@ -1,0 +1,69 @@
+{
+  "app": {
+    "title": "Container-Beladungssimulator",
+    "menu": {
+      "home": "Startseite",
+      "container": "Container-Beladung",
+      "about": "Über"
+    },
+    "footer": "Container-Beladungssimulator ©2023 Erstellt von Goobox"
+  },
+  "home": {
+    "welcome": "Willkommen beim Container-Beladungssimulator",
+    "description": "Dieses System bietet Container-Beladungssimulationsfunktionen, um Ihnen bei der Optimierung von Beladungsplänen zu helfen und die Effizienz zu verbessern. Entwickelt für Logistik- und Supply-Chain-Fachleute zur Vereinfachung des Beladungsplanungsprozesses.",
+    "features": "Systemfunktionen",
+    "featureList": [
+      "Unterstützung für mehrere Container-Spezifikationen",
+      "3D-Visualisierung der Beladungseffekte",
+      "Intelligenter Raumoptimierungsalgorithmus",
+      "Echtzeit-Beladungsdatenstatistik",
+      "Speichern und Exportieren von Beladungsplänen"
+    ],
+    "startSimulation": "Simulation starten",
+    "scrollDown": "Nach unten scrollen",
+    "learnMore": "Mehr erfahren"
+  },
+  "container": {
+    "settings": "Beladungseinstellungen",
+    "containerType": "Container-Typ",
+    "addCargo": "Fracht hinzufügen",
+    "cargoName": "Frachtname",
+    "dimensions": "Abmessungen (m)",
+    "length": "Länge",
+    "width": "Breite",
+    "height": "Höhe",
+    "weight": "Gewicht (kg)",
+    "quantity": "Menge",
+    "color": "Farbe",
+    "add": "Hinzufügen",
+    "cargoList": "Frachtliste",
+    "name": "Name",
+    "size": "Größe",
+    "actions": "Aktionen",
+    "remove": "Entfernen",
+    "simulation": "3D-Simulation",
+    "statistics": "Beladungsstatistik",
+    "totalVolume": "Gesamtvolumen",
+    "usedVolume": "Genutztes Volumen",
+    "utilizationRate": "Nutzungsrate",
+    "totalWeight": "Gesamtgewicht",
+    "maxWeight": "Maximales Gewicht"
+  },
+  "about": {
+    "title": "Über das System",
+    "version": "Version",
+    "contact": "Kontakt"
+  },
+  "common": {
+    "loading": "Wird geladen...",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "apply": "Anwenden",
+    "reset": "Zurücksetzen",
+    "goBack": "Zurück",
+    "changeLanguage": "Sprache ändern"
+  }
+} 

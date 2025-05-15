@@ -1,0 +1,103 @@
+{
+  "app": {
+    "title": "集装箱装柜模拟系统",
+    "menu": {
+      "home": "首页",
+      "container": "装柜模拟",
+      "about": "关于"
+    },
+    "footer": "集装箱装柜模拟系统 ©2025 Created by Goobox"
+  },
+  "home": {
+    "welcome": "欢迎",
+    "description": "本系统提供集装箱装载模拟功能，帮助您优化装载方案，提高装载效率。专为物流和供应链专业人员设计，简化装载规划流程。",
+    "features": "系统功能特点",
+    "solutions": "解决方案",
+    "featuresList": {
+      "optimization": {
+        "title": "智能装载优化",
+        "description": "采用先进算法自动计算最佳装载方案，提高空间利用率"
+      },
+      "visualPlanning": {
+        "title": "3D可视化规划",
+        "description": "直观的三维视图，实时预览装载效果，便于调整方案"
+      },
+      "efficiencyAnalysis": {
+        "title": "效率分析",
+        "description": "提供装载效率分析，帮助您识别优化空间"
+      },
+      "statistics": {
+        "title": "装载数据统计",
+        "description": "自动统计装载体积、重量和利用率，生成报表"
+      },
+      "exportPlan": {
+        "title": "方案导出",
+        "description": "一键导出装载方案，便于分享和执行"
+      }
+    },
+    "startSimulation": "开始模拟装载",
+    "scrollDown": "向下滚动",
+    "learnMore": "了解更多",
+    "alwaysFree": "永久免费使用",
+    "alwaysFreeDesc": "我们承诺该系统将永久免费，没有任何隐藏费用",
+    "freeBadge": "免费",
+    "noHiddenFees": "无隐藏费用",
+    "solemnPromise": "郑重承诺",
+    "openSource": "开源项目",
+    "freeForever": "永久免费",
+    "tryNow": "立即体验"
+  },
+  "container": {
+    "settings": "装载设置",
+    "containerType": "集装箱类型",
+    "addCargo": "添加货物",
+    "cargoName": "货物名称",
+    "dimensions": "尺寸 (米)",
+    "length": "长",
+    "width": "宽",
+    "height": "高",
+    "weight": "重量 (公斤)",
+    "quantity": "数量",
+    "color": "颜色",
+    "add": "添加",
+    "cargoList": "货物列表",
+    "name": "名称",
+    "size": "尺寸",
+    "actions": "操作",
+    "remove": "移除",
+    "simulation": "3D模拟",
+    "statistics": "装载统计",
+    "totalVolume": "总体积",
+    "usedVolume": "已用体积",
+    "utilizationRate": "利用率",
+    "totalWeight": "总重量",
+    "maxWeight": "最大重量"
+  },
+  "about": {
+    "title": "关于系统",
+    "version": "版本信息",
+    "projectDescription": "项目介绍",
+    "projectDescriptionText": "集装箱装柜模拟系统是一款专为物流和供应链专业人员设计的工具，帮助您优化装载方案，提高装载效率。系统采用先进的3D可视化技术和智能算法，为您提供直观、高效的装载规划解决方案。",
+    "contact": "联系方式",
+    "donation": "支持项目",
+    "donationDescription": "虽然我们承诺该系统永久免费使用，但维护和开发新功能需要资源支持。如果您觉得这个项目对您有所帮助，可以考虑通过以下方式支持我们继续改进。",
+    "donationMethodPaypal": "PayPal捐款",
+    "donationMethodCrypto": "加密货币捐款",
+    "donationTiers": "选择捐款金额",
+    "supporters": "支持者名单",
+    "supportersThankYou": "感谢以下用户对项目的慷慨支持！",
+    "freeForeverPromise": "无论收到多少捐款，我们始终承诺该系统将永久免费，没有任何隐藏费用或功能限制。"
+  },
+  "common": {
+    "loading": "加载中...",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "delete": "删除",
+    "edit": "编辑",
+    "apply": "应用",
+    "reset": "重置",
+    "goBack": "返回",
+    "changeLanguage": "切换语言"
+  }
+} 

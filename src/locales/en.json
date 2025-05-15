@@ -1,0 +1,103 @@
+{
+  "app": {
+    "title": "Container Loading Simulator",
+    "menu": {
+      "home": "Home",
+      "container": "Container Loading",
+      "about": "About"
+    },
+    "footer": "Container Loading Simulator ©2023 Created by Goobox"
+  },
+  "home": {
+    "welcome": "Welcome to Container Loading Simulator",
+    "description": "This system provides container loading simulation features to help you optimize loading plans and improve efficiency. Designed for logistics and supply chain professionals to simplify the loading planning process.",
+    "features": "System Features",
+    "solutions": "Solutions",
+    "featuresList": {
+      "optimization": {
+        "title": "Intelligent Loading Optimization",
+        "description": "Advanced algorithms automatically calculate the best loading plan to maximize space utilization"
+      },
+      "visualPlanning": {
+        "title": "3D Visual Planning",
+        "description": "Intuitive three-dimensional view to preview loading effects in real-time for easy adjustment"
+      },
+      "efficiencyAnalysis": {
+        "title": "Efficiency Analysis",
+        "description": "Provides loading efficiency analysis to help you identify optimization opportunities"
+      },
+      "statistics": {
+        "title": "Loading Data Statistics",
+        "description": "Automatically tracks volume, weight, and utilization rates with report generation"
+      },
+      "exportPlan": {
+        "title": "Plan Export",
+        "description": "One-click export of loading plans for easy sharing and execution"
+      }
+    },
+    "startSimulation": "Start Simulation",
+    "scrollDown": "Scroll Down",
+    "learnMore": "Learn More",
+    "alwaysFree": "Always Free to Use",
+    "alwaysFreeDesc": "We promise this system will always be free with no hidden costs",
+    "freeBadge": "FREE",
+    "noHiddenFees": "No Hidden Fees",
+    "solemnPromise": "Solemn Promise",
+    "openSource": "Open Source",
+    "freeForever": "Free Forever",
+    "tryNow": "Try Now"
+  },
+  "container": {
+    "settings": "Loading Settings",
+    "containerType": "Container Type",
+    "addCargo": "Add Cargo",
+    "cargoName": "Cargo Name",
+    "dimensions": "Dimensions (m)",
+    "length": "Length",
+    "width": "Width",
+    "height": "Height",
+    "weight": "Weight (kg)",
+    "quantity": "Quantity",
+    "color": "Color",
+    "add": "Add",
+    "cargoList": "Cargo List",
+    "name": "Name",
+    "size": "Size",
+    "actions": "Actions",
+    "remove": "Remove",
+    "simulation": "3D Simulation",
+    "statistics": "Loading Statistics",
+    "totalVolume": "Total Volume",
+    "usedVolume": "Used Volume",
+    "utilizationRate": "Utilization Rate",
+    "totalWeight": "Total Weight",
+    "maxWeight": "Max Weight"
+  },
+  "about": {
+    "title": "About the System",
+    "version": "Version",
+    "projectDescription": "Project Description",
+    "projectDescriptionText": "Container Loading Simulator is a tool designed for logistics and supply chain professionals to help optimize loading plans and improve efficiency. The system uses advanced 3D visualization technology and intelligent algorithms to provide intuitive and efficient loading planning solutions.",
+    "contact": "Contact",
+    "donation": "Support the Project",
+    "donationDescription": "While we promise that this system will always be free to use, maintaining and developing new features requires resources. If you find this project helpful, please consider supporting us to continue improving it through the following methods.",
+    "donationMethodPaypal": "Donate via PayPal",
+    "donationMethodCrypto": "Donate with Cryptocurrency",
+    "donationTiers": "Choose Donation Amount",
+    "supporters": "Our Supporters",
+    "supportersThankYou": "Thank you to the following users for their generous support of the project!",
+    "freeForeverPromise": "Regardless of the donations received, we always promise that this system will remain free forever, with no hidden costs or feature limitations."
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "apply": "Apply",
+    "reset": "Reset",
+    "goBack": "Go Back",
+    "changeLanguage": "Change Language"
+  }
+} 

@@ -1,0 +1,69 @@
+{
+  "app": {
+    "title": "Simulador de Carga de Contenedores",
+    "menu": {
+      "home": "Inicio",
+      "container": "Carga de Contenedores",
+      "about": "Acerca de"
+    },
+    "footer": "Simulador de Carga de Contenedores ©2023 Creado por Goobox"
+  },
+  "home": {
+    "welcome": "Bienvenido al Simulador de Carga de Contenedores",
+    "description": "Este sistema proporciona características de simulación de carga de contenedores para ayudarle a optimizar planes de carga y mejorar la eficiencia. Diseñado para profesionales de logística y cadena de suministro para simplificar el proceso de planificación de carga.",
+    "features": "Características del Sistema",
+    "featureList": [
+      "Soporte para múltiples especificaciones de contenedores",
+      "Visualización 3D de efectos de carga",
+      "Algoritmo inteligente de optimización del espacio",
+      "Estadísticas de datos de carga en tiempo real",
+      "Guardar y exportar planes de carga"
+    ],
+    "startSimulation": "Iniciar Simulación",
+    "scrollDown": "Desplazarse hacia abajo",
+    "learnMore": "Más información"
+  },
+  "container": {
+    "settings": "Configuración de Carga",
+    "containerType": "Tipo de Contenedor",
+    "addCargo": "Añadir Carga",
+    "cargoName": "Nombre de la Carga",
+    "dimensions": "Dimensiones (m)",
+    "length": "Longitud",
+    "width": "Anchura",
+    "height": "Altura",
+    "weight": "Peso (kg)",
+    "quantity": "Cantidad",
+    "color": "Color",
+    "add": "Añadir",
+    "cargoList": "Lista de Cargas",
+    "name": "Nombre",
+    "size": "Tamaño",
+    "actions": "Acciones",
+    "remove": "Eliminar",
+    "simulation": "Simulación 3D",
+    "statistics": "Estadísticas de Carga",
+    "totalVolume": "Volumen Total",
+    "usedVolume": "Volumen Utilizado",
+    "utilizationRate": "Tasa de Utilización",
+    "totalWeight": "Peso Total",
+    "maxWeight": "Peso Máximo"
+  },
+  "about": {
+    "title": "Sobre el Sistema",
+    "version": "Versión",
+    "contact": "Contacto"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "apply": "Aplicar",
+    "reset": "Restablecer",
+    "goBack": "Volver",
+    "changeLanguage": "Cambiar Idioma"
+  }
+} 

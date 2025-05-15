@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <!-- 集装箱背景，使用SVG格式确保高质量和可缩放性 -->
+  
+  <!-- 多个集装箱 -->
+  <g id="containers">
+    <!-- 集装箱1 - 蓝色 -->
+    <g transform="translate(50, 150)">
+      <rect x="0" y="0" width="200" height="150" fill="#1565C0" stroke="#0D47A1" stroke-width="3" />
+      <rect x="0" y="0" width="200" height="15" fill="#0D47A1" />
+      <rect x="10" y="30" width="180" height="5" fill="#BBDEFB" opacity="0.7" />
+      <rect x="10" y="45" width="180" height="5" fill="#BBDEFB" opacity="0.7" />
+      <rect x="10" y="60" width="180" height="5" fill="#BBDEFB" opacity="0.7" />
+      <text x="100" y="100" font-family="Arial" font-size="20" fill="#FFFFFF" text-anchor="middle">GooBox</text>
+      <rect x="5" y="120" width="20" height="20" fill="#0D47A1" />
+      <rect x="175" y="120" width="20" height="20" fill="#0D47A1" />
+    </g>
+
+    <!-- 集装箱2 - 红色 -->
+    <g transform="translate(260, 100)">
+      <rect x="0" y="0" width="200" height="150" fill="#C62828" stroke="#B71C1C" stroke-width="3" />
+      <rect x="0" y="0" width="200" height="15" fill="#B71C1C" />
+      <rect x="10" y="30" width="180" height="5" fill="#FFCDD2" opacity="0.7" />
+      <rect x="10" y="45" width="180" height="5" fill="#FFCDD2" opacity="0.7" />
+      <rect x="10" y="60" width="180" height="5" fill="#FFCDD2" opacity="0.7" />
+      <text x="100" y="100" font-family="Arial" font-size="20" fill="#FFFFFF" text-anchor="middle">GooBox</text>
+      <rect x="5" y="120" width="20" height="20" fill="#B71C1C" />
+      <rect x="175" y="120" width="20" height="20" fill="#B71C1C" />
+    </g>
+
+    <!-- 集装箱3 - 绿色 -->
+    <g transform="translate(150, 260)">
+      <rect x="0" y="0" width="200" height="150" fill="#2E7D32" stroke="#1B5E20" stroke-width="3" />
+      <rect x="0" y="0" width="200" height="15" fill="#1B5E20" />
+      <rect x="10" y="30" width="180" height="5" fill="#C8E6C9" opacity="0.7" />
+      <rect x="10" y="45" width="180" height="5" fill="#C8E6C9" opacity="0.7" />
+      <rect x="10" y="60" width="180" height="5" fill="#C8E6C9" opacity="0.7" />
+      <text x="100" y="100" font-family="Arial" font-size="20" fill="#FFFFFF" text-anchor="middle">GooBox</text>
+      <rect x="5" y="120" width="20" height="20" fill="#1B5E20" />
+      <rect x="175" y="120" width="20" height="20" fill="#1B5E20" />
+    </g>
+
+    <!-- 集装箱4 - 黄色 -->
+    <g transform="translate(370, 210)">
+      <rect x="0" y="0" width="200" height="150" fill="#F9A825" stroke="#F57F17" stroke-width="3" />
+      <rect x="0" y="0" width="200" height="15" fill="#F57F17" />
+      <rect x="10" y="30" width="180" height="5" fill="#FFF9C4" opacity="0.7" />
+      <rect x="10" y="45" width="180" height="5" fill="#FFF9C4" opacity="0.7" />
+      <rect x="10" y="60" width="180" height="5" fill="#FFF9C4" opacity="0.7" />
+      <text x="100" y="100" font-family="Arial" font-size="20" fill="#FFFFFF" text-anchor="middle">GooBox</text>
+      <rect x="5" y="120" width="20" height="20" fill="#F57F17" />
+      <rect x="175" y="120" width="20" height="20" fill="#F57F17" />
+    </g>
+
+    <!-- 集装箱堆叠效果 - 额外的小集装箱 -->
+    <g transform="translate(480, 140)">
+      <rect x="0" y="0" width="150" height="100" fill="#5E35B1" stroke="#4527A0" stroke-width="2" />
+      <rect x="0" y="0" width="150" height="10" fill="#4527A0" />
+      <text x="75" y="60" font-family="Arial" font-size="15" fill="#FFFFFF" text-anchor="middle">GooBox</text>
+    </g>
+
+    <g transform="translate(520, 80)">
+      <rect x="0" y="0" width="150" height="100" fill="#00897B" stroke="#00695C" stroke-width="2" />
+      <rect x="0" y="0" width="150" height="10" fill="#00695C" />
+      <text x="75" y="60" font-family="Arial" font-size="15" fill="#FFFFFF" text-anchor="middle">GooBox</text>
+    </g>
+  </g>
+
+  <!-- 集装箱吊臂 -->
+  <g id="crane" transform="translate(600, 20)">
+    <rect x="0" y="0" width="30" height="300" fill="#455A64" stroke="#263238" stroke-width="2" />
+    <rect x="-50" y="50" width="130" height="20" fill="#455A64" stroke="#263238" stroke-width="2" />
+    <line x1="0" y1="70" x2="-40" y2="270" stroke="#78909C" stroke-width="3" />
+    <line x1="30" y1="70" x2="70" y2="270" stroke="#78909C" stroke-width="3" />
+    <rect x="-60" y="270" width="150" height="30" fill="#455A64" stroke="#263238" stroke-width="2" />
+    <rect x="-30" y="300" width="90" height="15" fill="#263238" />
+  </g>
+
+  <!-- 集装箱港口地面 -->
+  <g id="ground">
+    <rect x="0" y="420" width="800" height="180" fill="#90A4AE" />
+    <line x1="0" y1="420" x2="800" y2="420" stroke="#607D8B" stroke-width="2" />
+    
+    <!-- 地面标记 -->
+    <line x1="50" y1="450" x2="150" y2="450" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="250" y1="450" x2="350" y2="450" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="450" y1="450" x2="550" y2="450" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="650" y1="450" x2="750" y2="450" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    
+    <line x1="50" y1="500" x2="150" y2="500" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="250" y1="500" x2="350" y2="500" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="450" y1="500" x2="550" y2="500" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="650" y1="500" x2="750" y2="500" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    
+    <line x1="50" y1="550" x2="150" y2="550" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="250" y1="550" x2="350" y2="550" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="450" y1="550" x2="550" y2="550" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+    <line x1="650" y1="550" x2="750" y2="550" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20,10" />
+  </g>
+</svg> 

@@ -1,0 +1,80 @@
+/* Ant Design 布局修复 */
+
+/* 基础布局组件 */
+.ant-layout {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  min-height: 100vh !important;
+}
+
+.ant-layout-header,
+.ant-layout-content,
+.ant-layout-footer,
+.ant-layout-sider {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* 网格系统修复 */
+.ant-row {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.ant-col {
+  box-sizing: border-box !important;
+}
+
+/* 卡片组件修复 */
+.ant-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* 表单组件修复 */
+.ant-form,
+.ant-form-item {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 响应式修复 */
+@media (max-width: 768px) {
+  .ant-layout-content {
+    padding: 0 !important;
+  }
+  
+  .ant-layout-header {
+    padding: 0 10px !important;
+  }
+  
+  .ant-layout-footer {
+    padding: 20px 10px !important;
+  }
+}
+
+/* 修复ant-design-vue/dist/reset.css中可能的问题 */
+* {
+  box-sizing: border-box !important;
+}
+
+body {
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.ant-menu {
+  box-sizing: border-box !important;
+  line-height: inherit !important;
+}
+
+.ant-menu-horizontal {
+  border-bottom: none !important;
+} 

@@ -1,0 +1,61 @@
+@import './base.css';
+
+/* 全局样式 */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#app {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  overflow-x: hidden;
+}
+
+/* 修复Ant Design组件 */
+.ant-layout, 
+.ant-layout-header, 
+.ant-layout-content, 
+.ant-layout-footer,
+.ant-row,
+.ant-col {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ant Design响应式布局修复 */
+@media (max-width: 768px) {
+  .ant-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* 链接样式 */
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: block;
+  }
+
+  #app {
+    display: block;
+    padding: 0;
+  }
+}
