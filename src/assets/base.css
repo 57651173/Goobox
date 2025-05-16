@@ -94,5 +94,5 @@ body {
 
 .ant-layout-content {
   width: 100% !important;
-  overflow-x: hidden !important;
+  overflow: hidden !important;
 }

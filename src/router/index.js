@@ -23,6 +23,12 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/About.vue'),
     },
+    {
+      path: '/settings',
+      name: 'settings',
+      // 系统设置页面
+      component: () => import('../views/Settings.vue'),
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // 如果有保存的位置，则恢复到保存的位置

@@ -16,13 +16,6 @@
     <FreeSection 
       :show="activeSections.free"
     />
-    
-    <!-- 返回顶部悬浮球 -->
-    <div class="back-to-top" v-show="showBackToTop" @click="scrollToTop">
-      <a-button type="primary" shape="circle" size="large">
-        <template #icon><up-outlined /></template>
-      </a-button>
-    </div>
   </div>
 </template>
 
@@ -30,7 +23,6 @@
 import { useI18n } from 'vue-i18n'
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { UpOutlined } from '@ant-design/icons-vue'
 import '../assets/css/home.css'
 
 // 导入组件
@@ -43,7 +35,6 @@ const { t, locale } = useI18n()
 const route = useRoute()
 const showContent = ref(false)
 const sections = ref([])
-const showBackToTop = ref(false)
 const activeSections = ref({
   hero: true,
   intro: false,
@@ -70,9 +61,6 @@ const scrollToTop = () => {
 const checkScroll = () => {
   const scrollPosition = window.scrollY
   const windowHeight = window.innerHeight
-  
-  // 显示/隐藏返回顶部按钮
-  showBackToTop.value = scrollPosition > windowHeight / 2
   
   sections.value.forEach(section => {
     const sectionEl = section.el
@@ -145,17 +133,47 @@ onUnmounted(() => {
 <style scoped>
 .back-to-top {
   position: fixed;
-  right: 30px;
-  bottom: 30px;
-  z-index: 999;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999; /* 确保最高层级 */
   cursor: pointer;
+}
+
+.back-to-top-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1890ff;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s;
 }
 
+.back-to-top-button:hover {
+  transform: translateY(-5px);
+  background-color: #096dd9;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.back-to-top-arrow {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.back-to-top-text {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
 @media (max-width: 768px) {
-  .back-to-top {
-    right: 20px;
-    bottom: 20px;
+  .back-to-top-button {
+    width: 50px;
+    height: 50px;
   }
 }
 </style> 

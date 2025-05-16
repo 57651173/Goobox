@@ -1,12 +1,13 @@
 {
   "app": {
-    "title": "Container Loading Simulator",
+    "title": "Container Loading System",
     "menu": {
       "home": "Home",
-      "container": "Container Loading",
-      "about": "About"
+      "container": "Container Simulation",
+      "about": "About",
+      "settings": "Settings"
     },
-    "footer": "Container Loading Simulator ©2023 Created by Goobox"
+    "footer": "Container Loading System ©2025 Created by Goobox"
   },
   "home": {
     "welcome": "Welcome to Container Loading Simulator",
@@ -47,20 +48,33 @@
     "freeForever": "Free Forever",
     "tryNow": "Try Now"
   },
+  "unit":{
+    "kg": "kg",
+    "m": "m",
+    "cm": "cm",
+    "mm": "mm",
+    "g": "g",
+    "l": "l",
+    "ml": "ml"
+  },
   "container": {
     "settings": "Loading Settings",
     "containerType": "Container Type",
     "addCargo": "Add Cargo",
     "cargoName": "Cargo Name",
-    "dimensions": "Dimensions (m)",
+    "dimensions": "Dimensions",
     "length": "Length",
     "width": "Width",
     "height": "Height",
-    "weight": "Weight (kg)",
+    "weight": "Weight",
     "quantity": "Quantity",
     "color": "Color",
     "add": "Add",
+    "selectCommonSize": "Select Common Size",
+    "analyzing": "Analyzing container loading...",
+    "addFailedDescription": "Attempted to add {attempted} items, successfully loaded {added} items.",
     "cargoList": "Cargo List",
+    "clearAll": "Clear All",
     "name": "Name",
     "size": "Size",
     "actions": "Actions",
@@ -71,7 +85,46 @@
     "usedVolume": "Used Volume",
     "utilizationRate": "Utilization Rate",
     "totalWeight": "Total Weight",
-    "maxWeight": "Max Weight"
+    "maxWeight": "Max Weight",
+    "containerGroups": {
+      "dryContainer": "Dry Container",
+      "reeferContainer": "Reefer Container"
+    },
+    "containerTypes": {
+      "20GP": "20ft Standard",
+      "40GP": "40ft Standard",
+      "40HC": "40ft High Cube",
+      "20RF": "20ft Refrigerated",
+      "40RF": "40ft Refrigerated",
+      "40RQHC": "40ft HC Refrigerated"
+    },
+    "internalDimensions": "Internal Dimensions",
+    "volume": "Volume",
+    "loadingStats": "Loading Statistics",
+    "loadedCargoVolume": "Loaded Cargo Volume",
+    "loadedCargoWeight": "Loaded Cargo Weight",
+    "showCameraPosition": "Show Camera Position",
+    "hideCameraPosition": "Hide Camera Position",
+    "resetCamera": "Reset Camera View",
+    "hideGrid": "Hide Grid",
+    "showGrid": "Show Grid",
+    "hideAxes": "Hide Axes",
+    "showAxes": "Show Axes",
+    "nameRequired": "Please enter cargo name",
+    "invalidLength": "Please enter a valid length",
+    "invalidWidth": "Please enter a valid width",
+    "invalidHeight": "Please enter a valid height",
+    "invalidWeight": "Please enter a valid weight",
+    "quantityRequired": "Please enter a valid quantity",
+    "validateFormFailed": "Please fill in complete cargo information",
+    "addSuccess": "Cargo added successfully",
+    "partialAddSuccess": "Some cargo items were added successfully",
+    "addFailed": "Failed to add cargo",
+    "quantityAndColor": "Quantity and Color",
+    "loadedCargo": "Loaded Cargo: {count} items",
+    "colorSelected": "Color selected",
+    "customColor": "Custom color",
+    "colorUpdated": "Color updated"
   },
   "about": {
     "title": "About the System",
@@ -99,5 +152,65 @@
     "reset": "Reset",
     "goBack": "Go Back",
     "changeLanguage": "Change Language"
-  }
+  },
+  "settings": {
+    "title": "System Settings",
+    "subtitle": "Customize system configuration to suit your needs",
+    "menu": {
+      "general": "General",
+      "appearance": "Appearance",
+      "language": "Language",
+      "advanced": "Advanced"
+    },
+    "general": {
+      "title": "General Settings",
+      "appName": "Application Name",
+      "version": "Version",
+      "features": "Features",
+      "containerCalculator": "Container Calculator",
+      "containerCalculatorDesc": "Container loading simulation and optimization",
+      "containerDetails": "Container Details Settings",
+      "maxItems": "Maximum Cargo Items",
+      "allowCustomDimensions": "Allow Custom Dimensions"
+    },
+    "appearance": {
+      "title": "Appearance Settings",
+      "primaryColor": "Primary Color",
+      "darkMode": "Dark Mode",
+      "animation": "Enable Animations",
+      "layout": "Layout Settings",
+      "showBackToTop": "Show Back to Top Button",
+      "headerFixed": "Fixed Header",
+      "maxContentWidth": "Max Content Width"
+    },
+    "language": {
+      "title": "Language Settings",
+      "currentLanguage": "Current Language",
+      "persistLocale": "Remember Language Selection"
+    },
+    "advanced": {
+      "title": "Advanced Settings",
+      "api": "API Settings",
+      "timeout": "Request Timeout",
+      "retry": "Retry Count",
+      "mockEnabled": "Enable Mock Data",
+      "resetAll": "Reset All Settings",
+      "export": "Export Configuration",
+      "import": "Import Configuration"
+    },
+    "actions": {
+      "reset": "Reset Section",
+      "save": "Save Settings"
+    },
+    "messages": {
+      "resetSuccess": "Current settings have been reset",
+      "resetAllSuccess": "All settings have been reset",
+      "saveSuccess": "Settings saved successfully",
+      "exportSuccess": "Configuration exported successfully",
+      "exportError": "Failed to export configuration",
+      "importSuccess": "Configuration imported successfully",
+      "importError": "Failed to import configuration"
+    }
+  },
+  "ton": "ton"
 } 

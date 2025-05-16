@@ -4,24 +4,58 @@
     "menu": {
       "home": "Startseite",
       "container": "Container-Beladung",
-      "about": "Über"
+      "about": "Über",
+      "settings": "Einstellungen"
     },
-    "footer": "Container-Beladungssimulator ©2023 Erstellt von Goobox"
+    "footer": "Container-Beladungssimulator ©2025 Erstellt von Goobox"
   },
   "home": {
     "welcome": "Willkommen beim Container-Beladungssimulator",
     "description": "Dieses System bietet Container-Beladungssimulationsfunktionen, um Ihnen bei der Optimierung von Beladungsplänen zu helfen und die Effizienz zu verbessern. Entwickelt für Logistik- und Supply-Chain-Fachleute zur Vereinfachung des Beladungsplanungsprozesses.",
     "features": "Systemfunktionen",
-    "featureList": [
-      "Unterstützung für mehrere Container-Spezifikationen",
-      "3D-Visualisierung der Beladungseffekte",
-      "Intelligenter Raumoptimierungsalgorithmus",
-      "Echtzeit-Beladungsdatenstatistik",
-      "Speichern und Exportieren von Beladungsplänen"
-    ],
+    "solutions": "Lösungen",
+    "featuresList": {
+      "optimization": {
+        "title": "Intelligente Beladungsoptimierung",
+        "description": "Fortschrittliche Algorithmen berechnen automatisch den besten Beladungsplan für maximale Raumnutzung"
+      },
+      "visualPlanning": {
+        "title": "3D-Visualisierungsplanung",
+        "description": "Intuitive dreidimensionale Ansicht zur Echtzeit-Vorschau der Beladungseffekte für einfache Anpassungen"
+      },
+      "efficiencyAnalysis": {
+        "title": "Effizienzanalyse",
+        "description": "Bietet Beladungseffizienzanalyse, um Optimierungsmöglichkeiten zu identifizieren"
+      },
+      "statistics": {
+        "title": "Beladungsdatenstatistik",
+        "description": "Erfasst automatisch Volumen, Gewicht und Nutzungsraten mit Berichtgenerierung"
+      },
+      "exportPlan": {
+        "title": "Planexport",
+        "description": "Ein-Klick-Export von Beladungsplänen für einfaches Teilen und Ausführen"
+      }
+    },
     "startSimulation": "Simulation starten",
     "scrollDown": "Nach unten scrollen",
-    "learnMore": "Mehr erfahren"
+    "learnMore": "Mehr erfahren",
+    "alwaysFree": "Immer kostenlos nutzbar",
+    "alwaysFreeDesc": "Wir versprechen, dass dieses System immer kostenlos sein wird ohne versteckte Kosten",
+    "freeBadge": "KOSTENLOS",
+    "noHiddenFees": "Keine versteckten Gebühren",
+    "solemnPromise": "Feierliches Versprechen",
+    "openSource": "Open Source",
+    "freeForever": "Für immer kostenlos",
+    "tryNow": "Jetzt ausprobieren"
+  },
+  "unit":{
+    "kg": "kg",
+    "m": "m",
+    "cm": "cm",
+    "mm": "mm",
+    "g": "g",
+    "l": "l",
+    "ml": "ml"
   },
   "container": {
     "settings": "Beladungseinstellungen",
@@ -37,6 +71,7 @@
     "color": "Farbe",
     "add": "Hinzufügen",
     "cargoList": "Frachtliste",
+    "clearAll": "Alles löschen",
     "name": "Name",
     "size": "Größe",
     "actions": "Aktionen",
@@ -47,12 +82,58 @@
     "usedVolume": "Genutztes Volumen",
     "utilizationRate": "Nutzungsrate",
     "totalWeight": "Gesamtgewicht",
-    "maxWeight": "Maximales Gewicht"
+    "maxWeight": "Maximales Gewicht",
+    "containerGroups": {
+      "dryContainer": "Standard-Trockencontainer",
+      "reeferContainer": "Kühlcontainer"
+    },
+    "containerTypes": {
+      "20GP": "20ft Standard",
+      "40GP": "40ft Standard",
+      "40HC": "40ft High Cube",
+      "20RF": "20ft Kühlcontainer",
+      "40RF": "40ft Kühlcontainer",
+      "40RQHC": "40ft High Cube Kühlcontainer"
+    },
+    "internalDimensions": "Innenabmessungen",
+    "volume": "Volumen",
+    "loadingStats": "Beladungsstatistik",
+    "loadedCargoVolume": "Beladenes Frachtvolumen",
+    "loadedCargoWeight": "Beladenes Frachtgewicht",
+    "showCameraPosition": "Kameraposition anzeigen",
+    "hideCameraPosition": "Kameraposition ausblenden",
+    "resetCamera": "Kamera zurücksetzen",
+    "hideGrid": "Raster ausblenden",
+    "showGrid": "Raster anzeigen",
+    "hideAxes": "Achsen ausblenden",
+    "showAxes": "Achsen anzeigen",
+    "nameRequired": "Bitte Frachtnamen eingeben",
+    "invalidLength": "Bitte gültige Länge eingeben",
+    "invalidWidth": "Bitte gültige Breite eingeben",
+    "invalidHeight": "Bitte gültige Höhe eingeben",
+    "invalidWeight": "Bitte gültiges Gewicht eingeben",
+    "validateFormFailed": "Bitte alle erforderlichen Frachtinformationen ausfüllen",
+    "addSuccess": "Fracht erfolgreich hinzugefügt",
+    "quantityAndColor": "Menge & Farbe",
+    "loadedCargo": "Geladene Fracht: {count} Elemente",
+    "colorSelected": "Farbe ausgewählt",
+    "customColor": "Benutzerdefinierte Farbe",
+    "colorUpdated": "Farbe aktualisiert"
   },
   "about": {
     "title": "Über das System",
     "version": "Version",
-    "contact": "Kontakt"
+    "projectDescription": "Projektbeschreibung",
+    "projectDescriptionText": "Der Container-Beladungssimulator ist ein Werkzeug für Logistik- und Supply-Chain-Fachleute, um Beladungspläne zu optimieren und die Effizienz zu verbessern. Das System verwendet fortschrittliche 3D-Visualisierungstechnologie und intelligente Algorithmen, um intuitive und effiziente Beladungsplanungslösungen anzubieten.",
+    "contact": "Kontakt",
+    "donation": "Projekt unterstützen",
+    "donationDescription": "Obwohl wir versprechen, dass dieses System immer kostenlos nutzbar sein wird, erfordert die Wartung und Entwicklung neuer Funktionen Ressourcen. Wenn Sie dieses Projekt hilfreich finden, können Sie uns über die folgenden Methoden unterstützen, um es weiter zu verbessern.",
+    "donationMethodPaypal": "Über PayPal spenden",
+    "donationMethodCrypto": "Mit Kryptowährung spenden",
+    "donationTiers": "Spendenbetrag wählen",
+    "supporters": "Unsere Unterstützer",
+    "supportersThankYou": "Vielen Dank an die folgenden Benutzer für ihre großzügige Unterstützung des Projekts!",
+    "freeForeverPromise": "Unabhängig von den erhaltenen Spenden versprechen wir immer, dass dieses System für immer kostenlos bleibt, ohne versteckte Kosten oder Funktionseinschränkungen."
   },
   "common": {
     "loading": "Wird geladen...",
@@ -65,5 +146,65 @@
     "reset": "Zurücksetzen",
     "goBack": "Zurück",
     "changeLanguage": "Sprache ändern"
-  }
+  },
+  "settings": {
+    "title": "Systemeinstellungen",
+    "subtitle": "Systemkonfiguration an Ihre Bedürfnisse anpassen",
+    "menu": {
+      "general": "Allgemein",
+      "appearance": "Erscheinungsbild",
+      "language": "Sprache",
+      "advanced": "Erweitert"
+    },
+    "general": {
+      "title": "Allgemeine Einstellungen",
+      "appName": "Anwendungsname",
+      "version": "Version",
+      "features": "Funktionen",
+      "containerCalculator": "Container-Rechner",
+      "containerCalculatorDesc": "Container-Beladungssimulation und -optimierung",
+      "containerDetails": "Container-Detaileinstellungen",
+      "maxItems": "Maximale Frachtartikel",
+      "allowCustomDimensions": "Benutzerdefinierte Abmessungen erlauben"
+    },
+    "appearance": {
+      "title": "Erscheinungsbild-Einstellungen",
+      "primaryColor": "Primärfarbe",
+      "darkMode": "Dunkelmodus",
+      "animation": "Animationen aktivieren",
+      "layout": "Layout-Einstellungen",
+      "showBackToTop": "Zurück-nach-oben-Schaltfläche anzeigen",
+      "headerFixed": "Fixierter Header",
+      "maxContentWidth": "Maximale Inhaltsbreite"
+    },
+    "language": {
+      "title": "Spracheinstellungen",
+      "currentLanguage": "Aktuelle Sprache",
+      "persistLocale": "Sprachauswahl merken"
+    },
+    "advanced": {
+      "title": "Erweiterte Einstellungen",
+      "api": "API-Einstellungen",
+      "timeout": "Anfrage-Timeout",
+      "retry": "Wiederholungszähler",
+      "mockEnabled": "Mock-Daten aktivieren",
+      "resetAll": "Alle Einstellungen zurücksetzen",
+      "export": "Konfiguration exportieren",
+      "import": "Konfiguration importieren"
+    },
+    "actions": {
+      "reset": "Abschnitt zurücksetzen",
+      "save": "Einstellungen speichern"
+    },
+    "messages": {
+      "resetSuccess": "Aktuelle Einstellungen wurden zurückgesetzt",
+      "resetAllSuccess": "Alle Einstellungen wurden zurückgesetzt",
+      "saveSuccess": "Einstellungen erfolgreich gespeichert",
+      "exportSuccess": "Konfiguration erfolgreich exportiert",
+      "exportError": "Fehler beim Exportieren der Konfiguration",
+      "importSuccess": "Konfiguration erfolgreich importiert",
+      "importError": "Fehler beim Importieren der Konfiguration"
+    }
+  },
+  "ton": "Tonne"
 } 

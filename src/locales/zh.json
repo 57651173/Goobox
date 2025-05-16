@@ -4,7 +4,8 @@
     "menu": {
       "home": "首页",
       "container": "装柜模拟",
-      "about": "关于"
+      "about": "关于",
+      "settings": "系统设置"
     },
     "footer": "集装箱装柜模拟系统 ©2025 Created by Goobox"
   },
@@ -47,20 +48,36 @@
     "freeForever": "永久免费",
     "tryNow": "立即体验"
   },
+  "unit":{
+    "kg": "千克",
+    "m": "米",
+    "cm": "厘米",
+    "mm": "毫米",
+    "g": "克",
+    "l": "升",
+    "ml": "毫升"
+  },
   "container": {
     "settings": "装载设置",
     "containerType": "集装箱类型",
     "addCargo": "添加货物",
     "cargoName": "货物名称",
-    "dimensions": "尺寸 (米)",
-    "length": "长",
-    "width": "宽",
-    "height": "高",
-    "weight": "重量 (公斤)",
+    "dimensions": "尺寸",
+    "length": "长度",
+    "width": "宽度",
+    "height": "高度",
+    "weight": "重量",
     "quantity": "数量",
     "color": "颜色",
     "add": "添加",
+    "selectCommonSize": "选择常用尺寸",
+    "addSuccess": "添加货物成功",
+    "partialAddSuccess": "部分货物添加成功",
+    "addFailed": "添加货物失败",
+    "analyzing": "正在分析装柜中...",
+    "addFailedDescription": "尝试添加 {attempted} 个货物，成功装载 {added} 个。",
     "cargoList": "货物列表",
+    "clearAll": "清空全部",
     "name": "名称",
     "size": "尺寸",
     "actions": "操作",
@@ -69,9 +86,44 @@
     "statistics": "装载统计",
     "totalVolume": "总体积",
     "usedVolume": "已用体积",
-    "utilizationRate": "利用率",
-    "totalWeight": "总重量",
-    "maxWeight": "最大重量"
+    "volumeUtil": "体积利用率",
+    "maxWeight": "最大载重",
+    "usedWeight": "已用重量",
+    "weightUtil": "重量利用率",
+    "containerGroups": {
+      "dryContainer": "标准干货集装箱",
+      "reeferContainer": "冷藏集装箱"
+    },
+    "containerTypes": {
+      "20GP": "20尺标准箱",
+      "40GP": "40尺标准箱",
+      "40HC": "40尺高箱",
+      "20RF": "20尺冷藏箱",
+      "40RF": "40尺冷藏箱",
+      "40RQHC": "40尺高箱冷藏箱"
+    },
+    "internalDimensions": "内部尺寸",
+    "loadingStats": "装载统计",
+    "loadedCargoVolume": "已装货物体积",
+    "loadedCargoWeight": "已装货物重量",
+    "showCameraPosition": "显示相机位置",
+    "hideCameraPosition": "隐藏相机位置",
+    "resetCamera": "重置相机视角",
+    "hideGrid": "隐藏网格",
+    "showGrid": "显示网格",
+    "hideAxes": "隐藏坐标轴",
+    "showAxes": "显示坐标轴",
+    "nameRequired": "请输入货物名称",
+    "invalidLength": "请输入有效的长度",
+    "invalidWidth": "请输入有效的宽度",
+    "invalidHeight": "请输入有效的高度",
+    "invalidWeight": "请输入有效的重量",
+    "validateFormFailed": "请填写完整的货物信息",
+    "quantityAndColor": "数量和颜色",
+    "loadedCargo": "已装载货物: {count} 件",
+    "colorSelected": "颜色已选择",
+    "customColor": "自定义颜色",
+    "colorUpdated": "颜色已更新"
   },
   "about": {
     "title": "关于系统",
@@ -99,5 +151,65 @@
     "reset": "重置",
     "goBack": "返回",
     "changeLanguage": "切换语言"
-  }
+  },
+  "settings": {
+    "title": "系统设置",
+    "subtitle": "自定义系统配置以适应您的需求",
+    "menu": {
+      "general": "通用设置",
+      "appearance": "外观设置",
+      "language": "语言设置",
+      "advanced": "高级设置"
+    },
+    "general": {
+      "title": "通用设置",
+      "appName": "应用名称",
+      "version": "版本号",
+      "features": "功能设置",
+      "containerCalculator": "装柜计算器",
+      "containerCalculatorDesc": "装柜模拟和优化功能",
+      "containerDetails": "装柜详细设置",
+      "maxItems": "最大货物数量",
+      "allowCustomDimensions": "允许自定义尺寸"
+    },
+    "appearance": {
+      "title": "外观设置",
+      "primaryColor": "主题色",
+      "darkMode": "暗黑模式",
+      "animation": "启用动画效果",
+      "layout": "布局设置",
+      "showBackToTop": "显示返回顶部按钮",
+      "headerFixed": "固定顶部导航栏",
+      "maxContentWidth": "最大内容宽度"
+    },
+    "language": {
+      "title": "语言设置",
+      "currentLanguage": "当前语言",
+      "persistLocale": "记住语言选择"
+    },
+    "advanced": {
+      "title": "高级设置",
+      "api": "API设置",
+      "timeout": "请求超时",
+      "retry": "失败重试次数",
+      "mockEnabled": "启用数据模拟",
+      "resetAll": "重置所有设置",
+      "export": "导出配置",
+      "import": "导入配置"
+    },
+    "actions": {
+      "reset": "重置当前设置",
+      "save": "保存设置"
+    },
+    "messages": {
+      "resetSuccess": "已重置当前设置",
+      "resetAllSuccess": "已重置所有设置",
+      "saveSuccess": "设置已保存",
+      "exportSuccess": "配置已导出",
+      "exportError": "导出配置失败",
+      "importSuccess": "配置已导入",
+      "importError": "导入配置失败"
+    }
+  },
+  "ton": "吨"
 } 

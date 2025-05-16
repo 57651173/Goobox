@@ -4,24 +4,58 @@
     "menu": {
       "home": "Inicio",
       "container": "Carga de Contenedores",
-      "about": "Acerca de"
+      "about": "Acerca de",
+      "settings": "Configuración"
     },
-    "footer": "Simulador de Carga de Contenedores ©2023 Creado por Goobox"
+    "footer": "Simulador de Carga de Contenedores ©2025 Creado por Goobox"
   },
   "home": {
     "welcome": "Bienvenido al Simulador de Carga de Contenedores",
     "description": "Este sistema proporciona características de simulación de carga de contenedores para ayudarle a optimizar planes de carga y mejorar la eficiencia. Diseñado para profesionales de logística y cadena de suministro para simplificar el proceso de planificación de carga.",
     "features": "Características del Sistema",
-    "featureList": [
-      "Soporte para múltiples especificaciones de contenedores",
-      "Visualización 3D de efectos de carga",
-      "Algoritmo inteligente de optimización del espacio",
-      "Estadísticas de datos de carga en tiempo real",
-      "Guardar y exportar planes de carga"
-    ],
+    "solutions": "Soluciones",
+    "featuresList": {
+      "optimization": {
+        "title": "Optimización Inteligente de Carga",
+        "description": "Los algoritmos avanzados calculan automáticamente el mejor plan de carga para maximizar la utilización del espacio"
+      },
+      "visualPlanning": {
+        "title": "Planificación Visual 3D",
+        "description": "Vista tridimensional intuitiva para previsualizar los efectos de carga en tiempo real para un fácil ajuste"
+      },
+      "efficiencyAnalysis": {
+        "title": "Análisis de Eficiencia",
+        "description": "Proporciona análisis de eficiencia de carga para ayudarle a identificar oportunidades de optimización"
+      },
+      "statistics": {
+        "title": "Estadísticas de Datos de Carga",
+        "description": "Rastrea automáticamente volumen, peso y tasas de utilización con generación de informes"
+      },
+      "exportPlan": {
+        "title": "Exportación de Plan",
+        "description": "Exportación con un clic de planes de carga para compartir y ejecutar fácilmente"
+      }
+    },
     "startSimulation": "Iniciar Simulación",
     "scrollDown": "Desplazarse hacia abajo",
-    "learnMore": "Más información"
+    "learnMore": "Más información",
+    "alwaysFree": "Siempre Gratuito",
+    "alwaysFreeDesc": "Prometemos que este sistema siempre será gratuito sin costos ocultos",
+    "freeBadge": "GRATIS",
+    "noHiddenFees": "Sin Tarifas Ocultas",
+    "solemnPromise": "Promesa Solemne",
+    "openSource": "Código Abierto",
+    "freeForever": "Gratuito Para Siempre",
+    "tryNow": "Probar Ahora"
+  },
+  "unit":{
+    "kg": "kg",
+    "m": "m",
+    "cm": "cm",
+    "mm": "mm",
+    "g": "g",
+    "l": "l",
+    "ml": "ml"
   },
   "container": {
     "settings": "Configuración de Carga",
@@ -36,6 +70,7 @@
     "quantity": "Cantidad",
     "color": "Color",
     "add": "Añadir",
+    "clearAll": "Limpiar Todo",
     "cargoList": "Lista de Cargas",
     "name": "Nombre",
     "size": "Tamaño",
@@ -47,12 +82,58 @@
     "usedVolume": "Volumen Utilizado",
     "utilizationRate": "Tasa de Utilización",
     "totalWeight": "Peso Total",
-    "maxWeight": "Peso Máximo"
+    "maxWeight": "Peso Máximo",
+    "containerGroups": {
+      "dryContainer": "Contenedores Secos Estándar",
+      "reeferContainer": "Contenedores Refrigerados"
+    },
+    "containerTypes": {
+      "20GP": "20 pies Estándar",
+      "40GP": "40 pies Estándar",
+      "40HC": "40 pies High Cube",
+      "20RF": "20 pies Refrigerado",
+      "40RF": "40 pies Refrigerado",
+      "40RQHC": "40 pies High Cube Refrigerado"
+    },
+    "internalDimensions": "Dimensiones Internas",
+    "volume": "Volumen",
+    "loadingStats": "Estadísticas de Carga",
+    "loadedCargoVolume": "Volumen de Carga Cargada",
+    "loadedCargoWeight": "Peso de Carga Cargada",
+    "showCameraPosition": "Mostrar Posición de Cámara",
+    "hideCameraPosition": "Ocultar Posición de Cámara",
+    "resetCamera": "Restablecer Cámara",
+    "hideGrid": "Ocultar Cuadrícula",
+    "showGrid": "Mostrar Cuadrícula",
+    "hideAxes": "Ocultar Ejes",
+    "showAxes": "Mostrar Ejes",
+    "nameRequired": "Por favor, ingrese el nombre de la carga",
+    "invalidLength": "Por favor, ingrese una longitud válida",
+    "invalidWidth": "Por favor, ingrese una anchura válida",
+    "invalidHeight": "Por favor, ingrese una altura válida",
+    "invalidWeight": "Por favor, ingrese un peso válido",
+    "validateFormFailed": "Por favor, complete toda la información de carga requerida",
+    "addSuccess": "Carga añadida con éxito",
+    "quantityAndColor": "Cantidad y Color",
+    "loadedCargo": "Carga cargada: {count} elementos",
+    "colorSelected": "Color seleccionado",
+    "customColor": "Color personalizado",
+    "colorUpdated": "Color actualizado"
   },
   "about": {
     "title": "Sobre el Sistema",
     "version": "Versión",
-    "contact": "Contacto"
+    "projectDescription": "Descripción del Proyecto",
+    "projectDescriptionText": "El Simulador de Carga de Contenedores es una herramienta diseñada para profesionales de logística y cadena de suministro para ayudar a optimizar planes de carga y mejorar la eficiencia. El sistema utiliza tecnología avanzada de visualización 3D y algoritmos inteligentes para proporcionar soluciones de planificación de carga intuitivas y eficientes.",
+    "contact": "Contacto",
+    "donation": "Apoyar el Proyecto",
+    "donationDescription": "Aunque prometemos que este sistema siempre será gratuito, el mantenimiento y desarrollo de nuevas características requiere recursos. Si encuentra útil este proyecto, considere apoyarnos para continuar mejorándolo a través de los siguientes métodos.",
+    "donationMethodPaypal": "Donar a través de PayPal",
+    "donationMethodCrypto": "Donar con Criptomoneda",
+    "donationTiers": "Elegir Cantidad de Donación",
+    "supporters": "Nuestros Colaboradores",
+    "supportersThankYou": "¡Gracias a los siguientes usuarios por su generoso apoyo al proyecto!",
+    "freeForeverPromise": "Independientemente de las donaciones recibidas, siempre prometemos que este sistema permanecerá gratuito para siempre, sin costos ocultos ni limitaciones de características."
   },
   "common": {
     "loading": "Cargando...",
@@ -65,5 +146,65 @@
     "reset": "Restablecer",
     "goBack": "Volver",
     "changeLanguage": "Cambiar Idioma"
-  }
+  },
+  "settings": {
+    "title": "Configuración del Sistema",
+    "subtitle": "Personalice la configuración del sistema para adaptarla a sus necesidades",
+    "menu": {
+      "general": "General",
+      "appearance": "Apariencia",
+      "language": "Idioma",
+      "advanced": "Avanzado"
+    },
+    "general": {
+      "title": "Configuración General",
+      "appName": "Nombre de la Aplicación",
+      "version": "Versión",
+      "features": "Características",
+      "containerCalculator": "Calculadora de Contenedores",
+      "containerCalculatorDesc": "Simulación y optimización de carga de contenedores",
+      "containerDetails": "Configuración de Detalles de Contenedor",
+      "maxItems": "Elementos de Carga Máximos",
+      "allowCustomDimensions": "Permitir Dimensiones Personalizadas"
+    },
+    "appearance": {
+      "title": "Configuración de Apariencia",
+      "primaryColor": "Color Primario",
+      "darkMode": "Modo Oscuro",
+      "animation": "Habilitar Animaciones",
+      "layout": "Configuración de Diseño",
+      "showBackToTop": "Mostrar Botón Volver Arriba",
+      "headerFixed": "Encabezado Fijo",
+      "maxContentWidth": "Ancho Máximo de Contenido"
+    },
+    "language": {
+      "title": "Configuración de Idioma",
+      "currentLanguage": "Idioma Actual",
+      "persistLocale": "Recordar Selección de Idioma"
+    },
+    "advanced": {
+      "title": "Configuración Avanzada",
+      "api": "Configuración de API",
+      "timeout": "Tiempo de Espera de Solicitud",
+      "retry": "Recuento de Reintentos",
+      "mockEnabled": "Habilitar Datos de Prueba",
+      "resetAll": "Restablecer Todas las Configuraciones",
+      "export": "Exportar Configuración",
+      "import": "Importar Configuración"
+    },
+    "actions": {
+      "reset": "Restablecer Sección",
+      "save": "Guardar Configuración"
+    },
+    "messages": {
+      "resetSuccess": "La configuración actual ha sido restablecida",
+      "resetAllSuccess": "Todas las configuraciones han sido restablecidas",
+      "saveSuccess": "Configuración guardada con éxito",
+      "exportSuccess": "Configuración exportada con éxito",
+      "exportError": "Error al exportar la configuración",
+      "importSuccess": "Configuración importada con éxito",
+      "importError": "Error al importar la configuración"
+    }
+  },
+  "ton": "tonelada"
 } 
