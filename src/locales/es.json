@@ -297,5 +297,11 @@
       "importError": "Error al importar la configuración"
     }
   },
-  "ton": "tonelada"
+  "ton": "tonelada",
+  "cargoAdd": {
+    "error": {
+      "containerNotFound": "Detalles del tipo de contenedor no encontrados",
+      "dimensionsMissing": "Dimensiones de carga inválidas"
+    }
+  }
 } 

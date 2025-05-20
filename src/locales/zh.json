@@ -8,7 +8,7 @@
       "settings": "设置"
     },
     "description": "一款高效的集装箱装载优化方案模拟工具",
-    "footer": "© 2023 Goobox 集装箱装载模拟器. 保留所有权利.",
+    "copyright": "© {year} Goobox 集装箱装载模拟器. 保留所有权利.",
     "language": "当前语言"
   },
   "home": {
@@ -74,6 +74,7 @@
     "color": "颜色",
     "size": "尺寸",
     "add": "添加",
+    "edit": "编辑",
     "remove": "移除",
     "action": "操作",
     "actions": "操作",
@@ -91,9 +92,13 @@
     "addFailed": "添加货物失败",
     "addFailedDescription": "尝试添加 {attempted} 件货物，成功装载 {added} 件。",
     "partialAddSuccess": "部分货物添加成功",
+    "selectColor": "选择颜色",
     "colorSelected": "颜色已选择",
     "colorUpdated": "颜色已更新",
     "customColor": "自定义颜色",
+    "randomColor": "随机颜色",
+    "containerColor": "集装箱颜色",
+    "contrastColor": "对比颜色",
     "sizeApplied": "尺寸已应用",
     "analyzing": "分析中...",
     "simulation": "模拟中...",
@@ -103,6 +108,13 @@
     "exportComplete": "报告导出完成",
     "exportFailed": "报告导出失败",
     "exportTimeout": "导出超时，请重试",
+    "confirmClearAll": "确定要清空所有货物吗？",
+    "confirmClearAllContent": "清空后无法恢复，请确认是否继续",
+    "confirmRemove": "确定要删除该货物吗？",
+    "confirmRemoveContent": "删除后无法恢复，请确认是否继续",
+    "removeSuccess": "货物删除成功",
+    "removeFailed": "货物删除失败",
+    "confirm": "确定",
     "cancel": "取消",
     "close": "关闭",
     "attribute": "属性",
@@ -146,6 +158,15 @@
     "total": "总计",
     "unknown": "未知",
     "totalItems": "货物总数",
+    "rotationAngle": "旋转角度",
+    "rotation":{
+      "auto": "自动",
+      "0": "0度",
+      "0deg": "0度",
+      "90": "90度",
+      "90deg": "90度",
+      "hint": ""
+    },
     "report": {
       "title": "集装箱装载计划报告",
       "generatedOn": "生成日期",
@@ -202,6 +223,7 @@
     "contact": "联系方式",
     "donation": "支持项目",
     "donationDescription": "虽然我们承诺该系统永久免费使用，但维护和开发新功能需要资源支持。如果您觉得这个项目对您有所帮助，可以考虑通过以下方式支持我们继续改进。",
+    "donationPurpose": "您的捐赠将用于：服务器费用、核心开发者津贴、文档优化",
     "donationMethodPaypal": "PayPal捐款",
     "donationMethodCrypto": "加密货币捐款",
     "donationTiers": "选择捐款金额",
@@ -370,6 +392,12 @@
       "loginFailed": "登录失败，请检查您的凭据或稍后再试。",
       "registerSuccess": "注册成功并已自动登录！",
       "registerFailed": "注册失败，请稍后再试。"
+    }
+  },
+  "cargoAdd": {
+    "error": {
+      "containerNotFound": "未找到选中的集装箱类型详情",
+      "dimensionsMissing": "货物尺寸无效"
     }
   }
 } 

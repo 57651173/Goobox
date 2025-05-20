@@ -1,5 +1,12 @@
 <template>
   <div class="home-container">
+    <SeoHead 
+      routeName="home"
+      :meta="{
+        keywords: '集装箱装载模拟, 3D装货, 货物优化, 物流规划, 运输解决方案',
+        description: '使用Goobox集装箱装载模拟器优化您的货物装载方案，节省空间和运输成本'
+      }"
+    />
     <HeroSection 
       :show="showContent"
       @scroll="scrollToSection"
@@ -24,6 +31,7 @@ import { useI18n } from 'vue-i18n'
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import '../assets/css/home.css'
+import SeoHead from '../components/SeoHead.vue'
 
 // 导入组件
 import HeroSection from '../components/home/HeroSection.vue'

@@ -4,27 +4,12 @@ import { RouterView, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { DownOutlined, SettingOutlined, GlobalOutlined } from '@ant-design/icons-vue'
 import useConfig from './config/useConfig'
-import { useHead } from '@vueuse/head'
+import SeoHead from './components/SeoHead.vue'
 import ThemeToggle from './components/ThemeToggle.vue'
 
 const { t, locale } = useI18n()
 const route = useRoute()
 const { config } = useConfig()
-
-// 设置页面元数据
-useHead({
-  title: computed(() => t('app.title')),
-  meta: [
-    {
-      name: 'description',
-      content: computed(() => t('app.description')),
-    },
-    {
-      name: 'keywords',
-      content: '集装箱装载, 货物优化, 3D模拟, Goobox'
-    }
-  ],
-})
 
 // 根据当前路径获取菜单选中项
 const getMenuKeyFromPath = (path) => {
@@ -126,6 +111,7 @@ const hideFooter = computed(() => {
 
 <template>
   <a-layout class="layout">
+    <SeoHead />
     <a-layout-header class="header" :class="{ 'header-fixed': config.ui.layout.headerFixed }">
       <div class="header-content" :style="{ maxWidth: `${config.ui.layout.maxContentWidth}px` }">
         <div class="logo logo-box">
@@ -197,7 +183,7 @@ const hideFooter = computed(() => {
           </a-select>
         </div>
         <div class="footer-copyright">
-          {{ t('app.footer') }}
+          {{ t('app.copyright', { year: new Date().getFullYear() }) }}
         </div>
       </div>
     </a-layout-footer>
@@ -395,6 +381,11 @@ html, body {
 
 .footer-logo {
   margin-bottom: var(--spacing-4);
+  img{
+    border-radius: 6px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+  }
 }
 
 .footer-links {

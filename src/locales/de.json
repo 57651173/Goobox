@@ -297,5 +297,11 @@
       "importError": "Fehler beim Importieren der Konfiguration"
     }
   },
-  "ton": "Tonne"
+  "ton": "Tonne",
+  "cargoAdd": {
+    "error": {
+      "containerNotFound": "Containertyp-Details nicht gefunden",
+      "dimensionsMissing": "Ungültige Frachtabmessungen"
+    }
+  }
 } 

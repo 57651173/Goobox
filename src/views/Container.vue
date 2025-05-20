@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router' // 导入 useRouter
 import { useAuthStore } from '../store/auth' // 导入 Auth Store
@@ -13,6 +13,8 @@ const { t } = useI18n()
 const router = useRouter() // 获取 router 实例
 const authStore = useAuthStore() // 获取 auth store 实例
 const isLoggedIn = computed(() => authStore.isLoggedIn) // 获取登录状态
+
+const needRegister = computed(() => config.features.containerRegister)
 
 let nextInstanceId = 0; // 在<script setup>的顶层声明，用于生成唯一ID
 
@@ -152,7 +154,7 @@ function roundToPrecision(value, precision) {
 // 辅助函数：检查碰撞
 function checkCollision(position, length, width, height, existingCargos) {
   // 添加详细日志
-  console.log(`[checkCollision] 检查货物碰撞: position=(${position.x}, ${position.y}, ${position.z}), 尺寸=${length}x${width}x${height}`);
+  // console.log(`[checkCollision] 检查货物碰撞: position=(${position.x}, ${position.y}, ${position.z}), 尺寸=${length}x${width}x${height}`);
   
   for (const placedCargo of existingCargos) {
     if (!placedCargo.position) continue;
@@ -181,15 +183,15 @@ function checkCollision(position, length, width, height, existingCargos) {
     const overlapsZ = !(newCargoBox.maxZ <= placedCargoBox.minZ || newCargoBox.minZ >= placedCargoBox.maxZ);
     
     if (overlapsX && overlapsY && overlapsZ) {
-      console.log(`  发现碰撞: 与货物(${P_X}, ${P_Y}, ${P_Z}), 尺寸=${P_L}x${P_W}x${P_H}`);
-      console.log(`    X重叠: [${newCargoBox.minX}, ${newCargoBox.maxX}] 与 [${placedCargoBox.minX}, ${placedCargoBox.maxX}]`);
-      console.log(`    Y重叠: [${newCargoBox.minY}, ${newCargoBox.maxY}] 与 [${placedCargoBox.minY}, ${placedCargoBox.maxY}]`);
-      console.log(`    Z重叠: [${newCargoBox.minZ}, ${newCargoBox.maxZ}] 与 [${placedCargoBox.minZ}, ${placedCargoBox.maxZ}]`);
+      // console.log(`  发现碰撞: 与货物(${P_X}, ${P_Y}, ${P_Z}), 尺寸=${P_L}x${P_W}x${P_H}`);
+      // console.log(`    X重叠: [${newCargoBox.minX}, ${newCargoBox.maxX}] 与 [${placedCargoBox.minX}, ${placedCargoBox.maxX}]`);
+      // console.log(`    Y重叠: [${newCargoBox.minY}, ${newCargoBox.maxY}] 与 [${placedCargoBox.minY}, ${placedCargoBox.maxY}]`);
+      // console.log(`    Z重叠: [${newCargoBox.minZ}, ${newCargoBox.maxZ}] 与 [${placedCargoBox.minZ}, ${placedCargoBox.maxZ}]`);
       return true; // 发现碰撞
     }
   }
   
-  console.log(`  检查结果: 未发现碰撞`);
+  // console.log(`  检查结果: 未发现碰撞`);
   return false; // 没有碰撞
 }
 
@@ -243,9 +245,69 @@ function checkSupport(position, length, width, height, existingCargos) {
   return isSupported;
 }
 
+// 装载策略：依照Y->Z->X的顺序
+// 首先沿Y轴方向（靠近左侧A墙面）先铺满
+// 然后向上Z轴方向堆叠
+// 当A面铺满后，再沿F面（X轴方向）移动
+// 循环以上逻辑
+const findBestPosition = (occupiedSpace, gridSize, gridStepX, gridStepY, gridStepZ, gridLengthX, gridWidthY, gridHeightZ) => {
+  // 从X=0开始扫描，确保靠近F墙(前侧墙面)的位置先被填满
+  for (let startX = 0; startX <= gridLengthX - gridStepX; startX++) {
+    // 从Y=0开始，沿Y轴方向向右扫描，确保靠近A墙(左侧墙面)的位置先被填满
+    for (let startY = 0; startY <= gridWidthY - gridStepY; startY++) {
+      // 先尝试在底层放置
+      let startZ = 0;
+      
+      // 在当前X,Y坐标，找到最高的Z坐标
+      while (startZ < gridHeightZ - gridStepZ) {
+        // 检查当前位置是否可以放置货物
+        const canPlace = canPlaceCargo(
+          occupiedSpace, 
+          startX, startY, startZ,
+          gridStepX, gridStepY, gridStepZ,
+          gridLengthX, gridWidthY, gridHeightZ
+        );
+        
+        // 检查支撑（如果不在底层）
+        let hasSupport = startZ === 0; // 底层自动有支撑
+        
+        if (!hasSupport && canPlace) {
+          hasSupport = checkHasSupport(
+            occupiedSpace,
+            startX, startY, startZ,
+            gridStepX, gridStepY,
+            gridLengthX, gridWidthY, gridHeightZ
+          );
+        }
+        
+        if (canPlace && hasSupport) {
+          const xPos = roundToPrecision(startX * gridSize, 2);
+          const yPos = roundToPrecision(startY * gridSize, 2);
+          const zPos = roundToPrecision(startZ * gridSize, 2);
+          
+          return { 
+            startX, 
+            startY, 
+            startZ, 
+            xPos, 
+            yPos, 
+            zPos 
+          };
+        }
+        
+        // 向上尝试下一层Z
+        startZ++;
+      }
+    }
+  }
+  
+  // 没有找到合适的位置
+  return null;
+};
+
 // 处理添加货物事件
 const handleAddCargo = (cargoDataFromPanel) => {
-  console.log(`[Container.vue] handleAddCargo (新策略): 添加货物 = ${JSON.stringify(cargoDataFromPanel)}`)
+  console.log(`[Container.vue] handleAddCargo: 添加货物 = ${JSON.stringify(cargoDataFromPanel)}`)
   const quantityToAdd = cargoDataFromPanel.quantity || 1;
   let successfullyAddedCount = 0;
   
@@ -296,23 +358,48 @@ const handleAddCargo = (cargoDataFromPanel) => {
         throw new Error('货物尺寸无效');
       }
       
-      const orientations = [
-        { L: initialCargoL, W: initialCargoW, H: initialCargoH },
-        { L: initialCargoL, W: initialCargoH, H: initialCargoW },
-        { L: initialCargoW, W: initialCargoL, H: initialCargoH },
-        { L: initialCargoW, W: initialCargoH, H: initialCargoL },
-        { L: initialCargoH, W: initialCargoL, H: initialCargoW },
-        { L: initialCargoH, W: initialCargoW, H: initialCargoL },
-      ];
+      console.log(`初始货物尺寸: L=${initialCargoL}, W=${initialCargoW}, H=${initialCargoH}`);
+      console.log(`严格保持高度在Z轴，只考虑水平方向(X-Y平面)的旋转`);
+      console.log(`当前旋转角度选项: ${cargoDataFromPanel.rotationAngle || 'auto'}`);
 
+      // 识别长和宽中最长的边
+      const horizontalLongestDimension = Math.max(initialCargoL, initialCargoW);
+      const horizontalShortestDimension = Math.min(initialCargoL, initialCargoW);
+
+      console.log(`货物水平边长(从小到大): ${horizontalShortestDimension}, ${horizontalLongestDimension}, 高度保持: ${initialCargoH}`);
+      
+      // 根据用户选择的旋转角度确定可用的摆放方向
+      let orientations = [];
       let maxTheoreticalFit = 0;
       let bestOrientationDetails = null;
-
+      
       console.log(`集装箱尺寸: L=${C_L}, W=${C_W}, H=${C_H}`);
-      console.log(`初始货物尺寸: L=${initialCargoL}, W=${initialCargoW}, H=${initialCargoH}`);
-
+      
+      // 使用货物特定的旋转角度设置
+      const rotationAngleValue = cargoDataFromPanel.rotationAngle || 'auto';
+      
+      if (rotationAngleValue === 'auto') {
+        // 自动模式：考虑两种摆放方向
+        orientations = [
+          { L: initialCargoL, W: initialCargoW, H: initialCargoH, originL: initialCargoL, originW: initialCargoW, rotated: false }, // 原始方向
+          { L: initialCargoW, W: initialCargoL, H: initialCargoH, originL: initialCargoL, originW: initialCargoW, rotated: true }   // 水平旋转90度
+        ];
+      } else if (rotationAngleValue === '0') {
+        // 固定0度：只使用原始方向
+        orientations = [
+          { L: initialCargoL, W: initialCargoW, H: initialCargoH, originL: initialCargoL, originW: initialCargoW, rotated: false }  // 原始方向
+        ];
+      } else if (rotationAngleValue === '90') {
+        // 固定90度：只使用旋转后的方向
+        orientations = [
+          { L: initialCargoW, W: initialCargoL, H: initialCargoH, originL: initialCargoL, originW: initialCargoW, rotated: true }   // 水平旋转90度
+        ];
+      }
+      
+      // 设置优先顺序 - Y轴优先
+      // 根据Y->Z->X的摆放原则，我们希望最长边沿Y轴(宽度方向)
       for (const orientation of orientations) {
-        const { L: o_L, W: o_W, H: o_H } = orientation;
+        const { L: o_L, W: o_W, H: o_H, rotated } = orientation;
         if (o_L <= 0 || o_W <= 0 || o_H <= 0) continue;
         if (o_L > C_L || o_W > C_W || o_H > C_H) { // 单个货物就超出集装箱
           console.log(`  方向 (${o_L}x${o_W}x${o_H}) 超出集装箱，跳过`);
@@ -322,15 +409,31 @@ const handleAddCargo = (cargoDataFromPanel) => {
         const num_x_orientation = Math.floor(C_L / o_L);
         const num_y_orientation = Math.floor(C_W / o_W);
         const num_z_orientation = Math.floor(C_H / o_H);
-        const currentTheoreticalFit = num_x_orientation * num_y_orientation * num_z_orientation;
         
-        console.log(`  测试方向: L=${o_L}, W=${o_W}, H=${o_H} -> nx=${num_x_orientation}, ny=${num_y_orientation}, nz=${num_z_orientation}, 总计=${currentTheoreticalFit}`);
+        let currentTheoreticalFit = num_x_orientation * num_y_orientation * num_z_orientation;
+        
+        // 给Y轴方向增加额外优先级
+        // 如果长边在Y轴，增加适应度评分
+        const isLongestOnYAxis = Math.abs(o_W - horizontalLongestDimension) < 0.001;
+        
+        // 给Y轴方向的摆放增加优先级评分
+        if (isLongestOnYAxis) {
+          // 增加15%的适应度评分，提高Y方向长边的优先级
+          currentTheoreticalFit = currentTheoreticalFit * 1.15;
+          console.log(`  方向 (${o_L}x${o_W}x${o_H}) Y轴方向优先: 理论装载量=${num_x_orientation * num_y_orientation * num_z_orientation}, 加权后=${currentTheoreticalFit}, ${rotated ? '旋转了90度' : '原始方向'}`);
+        } else {
+          console.log(`  方向 (${o_L}x${o_W}x${o_H}) 普通方向: 理论装载量=${currentTheoreticalFit}, ${rotated ? '旋转了90度' : '原始方向'}`);
+        }
 
         if (currentTheoreticalFit > maxTheoreticalFit) {
           maxTheoreticalFit = currentTheoreticalFit;
           bestOrientationDetails = { 
             L: o_L, W: o_W, H: o_H, 
-            nx: num_x_orientation, ny: num_y_orientation, nz: num_z_orientation 
+            originL: orientation.originL,
+            originW: orientation.originW,
+            nx: num_x_orientation, ny: num_y_orientation, nz: num_z_orientation,
+            isLongestOnYAxis, // 记录是否长边在Y轴
+            rotated: orientation.rotated // 记录是否进行了水平旋转
           };
         }
       }
@@ -342,97 +445,128 @@ const handleAddCargo = (cargoDataFromPanel) => {
       }
       
       console.log('最佳摆放方向:', bestOrientationDetails);
-      const { L: cargoDimL, W: cargoDimW, H: cargoDimH, 
-              nx: num_x_fit, ny: num_y_fit, nz: num_z_fit } = bestOrientationDetails;
+      const { L: cargoDimL, W: cargoDimW, H: cargoDimH, rotated } = bestOrientationDetails;
+      console.log(`选择摆放方向: 长=${cargoDimL}, 宽=${cargoDimW}, 高=${cargoDimH}, ${rotated ? '已水平旋转90度' : '原始方向'}`);
 
-      for (let itemLoopIndex = 0; itemLoopIndex < quantityToAdd; itemLoopIndex++) {
-        if (loadingTimedOut.value) break;
-        let spotFoundForItem = false;
-        
-        // 新的装载顺序: X (深->浅 A->C) -> Z (下->上 B->D) -> Y (两侧->中间 F,E->center)
-        // k_x: 沿X轴 (长度, A面(0) -> C面(C_L))
-        for (let k_x = 0; k_x < num_x_fit; k_x++) {
-          // k_z: 沿Z轴 (高度, B地面(0) -> D顶部(C_H))
-          for (let k_z = 0; k_z < num_z_fit; k_z++) {
-            
-            // k_y: 沿Y轴 (宽度), 实现两侧到中间的填充顺序
-            const y_indices_order = [];
-            let left_y_idx = 0;
-            let right_y_idx = num_y_fit - 1;
-            while (left_y_idx <= right_y_idx) {
-              if (left_y_idx === right_y_idx) { // 中间位置
-                y_indices_order.push(left_y_idx);
-              } else {
-                y_indices_order.push(left_y_idx);  // F面一侧 (或起始侧, y=0方向)
-                y_indices_order.push(right_y_idx); // E面一侧 (或末端侧, y=max方向)
+      // 创建一个三维空间表示集装箱装载情况
+      // 使用三维数组来记录集装箱中的空间占用情况，true表示已被占用，false表示空闲
+      const gridSize = 0.1; // 网格分辨率，每0.1米一个网格
+      const gridLengthX = Math.ceil(C_L / gridSize);
+      const gridWidthY = Math.ceil(C_W / gridSize);
+      const gridHeightZ = Math.ceil(C_H / gridSize);
+      
+      // 初始化所有位置为空闲
+      const occupiedSpace = Array(gridLengthX).fill().map(() => 
+          Array(gridWidthY).fill().map(() => 
+              Array(gridHeightZ).fill(false)
+          )
+      );
+
+      // 更新已有货物占用的空间
+      cargoList.value.forEach(cargo => {
+        if (cargo.position) {
+          const startX = Math.floor(cargo.position.x / gridSize);
+          const endX = Math.ceil((cargo.position.x + cargo.length) / gridSize);
+          const startY = Math.floor(cargo.position.y / gridSize);
+          const endY = Math.ceil((cargo.position.y + cargo.width) / gridSize);
+          const startZ = Math.floor(cargo.position.z / gridSize);
+          const endZ = Math.ceil((cargo.position.z + cargo.height) / gridSize);
+          
+          for (let x = startX; x < endX && x < gridLengthX; x++) {
+            for (let y = startY; y < endY && y < gridWidthY; y++) {
+              for (let z = startZ; z < endZ && z < gridHeightZ; z++) {
+                occupiedSpace[x][y][z] = true;
               }
-              left_y_idx++;
-              right_y_idx--;
             }
+          }
+        }
+      });
+      
+      console.log(`初始化三维空间网格 (${gridLengthX}x${gridWidthY}x${gridHeightZ})...`);
 
-            for (const k_y of y_indices_order) {
-              if (loadingTimedOut.value) { spotFoundForItem = true; break; } 
-
-              const targetPos = {
-                x: roundToPrecision(k_x * cargoDimL, 2),       // X坐标 (A->C)
-                y: roundToPrecision(k_y * cargoDimW, 2),       // Y坐标 (两侧->中间)
-                z: roundToPrecision(k_z * cargoDimH, 2)        // Z坐标 (下->上 B->D)
-              };
-
-              // 边界检查 
-              if (targetPos.x + cargoDimL > C_L + 0.001 ||
-                  targetPos.y + cargoDimW > C_W + 0.001 ||
-                  targetPos.z + cargoDimH > C_H + 0.001) {
-                continue; 
-              }
-              
-              if (!checkCollision(targetPos, cargoDimL, cargoDimW, cargoDimH, cargoList.value)) {
-                const singleCargoDataForItem = { ...cargoDataFromPanel };
-                delete singleCargoDataForItem.quantity; 
-
-                let colorValue = singleCargoDataForItem.color || '#FF5722';
-                if (!colorValue.startsWith('#')) colorValue = '#' + colorValue;
-                if (colorValue.length > 7) colorValue = colorValue.substring(0, 7);
-
-                const currentStandardizedCargo = {
-                  ...singleCargoDataForItem,
-                  name: singleCargoDataForItem.name || `Cargo ${nextInstanceId}`,
-                  color: colorValue,
-                  originalLength: initialCargoL,
-                  originalWidth: initialCargoW,
-                  originalHeight: initialCargoH,
-                };
-                
-                const newCargoInstance = {
-                  ...currentStandardizedCargo,
-                  length: cargoDimL, 
-                  width: cargoDimW,
-                  height: cargoDimH,
-                  id: singleCargoDataForItem.id ? `${''}${singleCargoDataForItem.id}-inst-${nextInstanceId}` : `cargo-${Date.now()}-${Math.random().toString(36).substring(2, 7)}-${nextInstanceId}`,
-            instanceId: nextInstanceId++,
-                  position: targetPos,
-                  batchIndex: itemLoopIndex, 
-                  batchSize: quantityToAdd
-                };
-                
-                cargoList.value.push(newCargoInstance);
-          successfullyAddedCount++;
-                spotFoundForItem = true;
-                console.log(`成功添加第 ${itemLoopIndex + 1}/${quantityToAdd} 个货物 (InstID: ${newCargoInstance.instanceId}) 位置:`, targetPos, `尺寸: ${cargoDimL}x${cargoDimW}x${cargoDimH}`);
-                break; 
-              }
-            } // 结束 k_y 循环 (Y轴)
-            if (spotFoundForItem || loadingTimedOut.value) break; 
-          } // 结束 k_z 循环 (Z轴)
-          if (spotFoundForItem || loadingTimedOut.value) break; 
-        } // 结束 k_x 循环 (X轴)
+      // 依次摆放每个货物
+      for (let itemIndex = 0; itemIndex < quantityToAdd; itemIndex++) {
+        if (loadingTimedOut.value) break;
         
-        if (!spotFoundForItem && !loadingTimedOut.value) {
-          console.warn(`无法为第 ${itemLoopIndex + 1}/${quantityToAdd} 个货物找到空余格点位置。`);
-          lastAddingResult.value.message = `集装箱空间不足，部分货物 (${successfullyAddedCount}/${quantityToAdd}) 无法按当前策略装载。`;
-          lastAddingResult.value.success = successfullyAddedCount > 0; 
+        let placed = false;
+        
+        // 根据 Y->Z->X 的装载策略寻找最佳位置
+        const gridStepY = Math.ceil(cargoDimW / gridSize); // Y方向上需要的网格数
+        const gridStepZ = Math.ceil(cargoDimH / gridSize); // Z方向上需要的网格数 - 高度始终在Z轴方向
+        const gridStepX = Math.ceil(cargoDimL / gridSize); // X方向上需要的网格数
+        
+        console.log(`装载策略: Y->Z->X，货物需要格点数：X=${gridStepX}, Y=${gridStepY}, Z=${gridStepZ}`);
+        
+        // 寻找最佳位置（按Y->Z->X顺序）
+        const bestPosition = findBestPosition(
+          occupiedSpace, 
+          gridSize,
+          gridStepX, gridStepY, gridStepZ,
+          gridLengthX, gridWidthY, gridHeightZ
+        );
+        
+        // 如果找到合适位置，则放置货物
+        if (bestPosition) {
+          const { startX, startY, startZ, xPos, yPos, zPos } = bestPosition;
+          
+          // 标记此空间为已占用
+          markSpaceAsOccupied(
+            occupiedSpace,
+            startX, startY, startZ,
+            gridStepX, gridStepY, gridStepZ,
+            gridLengthX, gridWidthY, gridHeightZ
+          );
+          
+          // 创建新的货物实例
+          let colorValue = cargoDataFromPanel.color || '#FF5722';
+          if (!colorValue.startsWith('#')) colorValue = '#' + colorValue;
+          if (colorValue.length > 7) colorValue = colorValue.substring(0, 7);
+          
+          const currentStandardizedCargo = {
+            ...cargoDataFromPanel,
+            name: cargoDataFromPanel.name || `Cargo ${nextInstanceId}`,
+            color: colorValue,
+            originalLength: initialCargoL,
+            originalWidth: initialCargoW,
+            originalHeight: initialCargoH,
+          };
+          
+          const newCargoInstance = {
+            ...currentStandardizedCargo,
+            length: cargoDimL,
+            width: cargoDimW,
+            height: cargoDimH,
+            originalLength: initialCargoL,
+            originalWidth: initialCargoW,
+            originalHeight: initialCargoH,
+            isRotatedHorizontally: bestOrientationDetails.rotated, // 标记物品是否在水平方向旋转
+            id: cargoDataFromPanel.id ? `${''}${cargoDataFromPanel.id}-inst-${nextInstanceId}` : `cargo-${Date.now()}-${Math.random().toString(36).substring(2, 7)}-${nextInstanceId}`,
+            instanceId: nextInstanceId++,
+            position: { 
+              x: xPos, 
+              y: yPos, 
+              z: zPos 
+            },
+            batchIndex: itemIndex,
+            batchSize: quantityToAdd
+          };
+          
+          cargoList.value.push(newCargoInstance);
+          successfullyAddedCount++;
+          placed = true;
+          
+          console.log(`成功放置货物 #${itemIndex+1}, 位置(x=${xPos},y=${yPos},z=${zPos}), 尺寸=${cargoDimL}x${cargoDimW}x${cargoDimH}, Y->Z->X顺序`);
+          console.log(`  货物原始尺寸: L=${initialCargoL}, W=${initialCargoW}, H=${initialCargoH}`);
+          console.log(`  货物使用尺寸: L=${cargoDimL} (X轴), W=${cargoDimW} (Y轴), H=${cargoDimH} (Z轴)`);
+          console.log(`  货物实例ID: ${newCargoInstance.id}, 实例索引: ${newCargoInstance.instanceId}`);
+        }
+        
+        if (!placed && !loadingTimedOut.value) {
+          console.warn(`无法为第 ${itemIndex + 1}/${quantityToAdd} 个货物找到合适的位置。`);
+          lastAddingResult.value.message = `集装箱空间不足或现有摆放方式无法容纳，已成功装载 ${successfullyAddedCount}/${quantityToAdd} 件。`;
+          lastAddingResult.value.success = successfullyAddedCount > 0;
           if(successfullyAddedCount === 0 && quantityToAdd > 0) lastAddingResult.value.success = false;
-          break; 
+          break;
         }
       }
 
@@ -450,7 +584,7 @@ const handleAddCargo = (cargoDataFromPanel) => {
       }
 
     } catch (error) {
-      console.error('添加货物过程中发生错误 (新策略):', error);
+      console.error('添加货物过程中发生错误:', error);
       lastAddingResult.value.success = false;
       lastAddingResult.value.message = `添加货物失败: ${error.message || '未知错误'}`;
     } finally {
@@ -459,40 +593,143 @@ const handleAddCargo = (cargoDataFromPanel) => {
         loadingTimer.value = null;
       }
       isAddingCargo.value = false;
-      console.log('[handleAddCargo 新策略] 完成. 结果:', lastAddingResult.value);
+      console.log('[handleAddCargo] 完成. 结果:', lastAddingResult.value);
     }
   }, 100); 
 };
 
+// 检查指定位置是否可以放置货物（无碰撞）
+function canPlaceCargo(occupiedSpace, startX, startY, startZ, lenX, lenY, lenZ, gridLengthX, gridWidthY, gridHeightZ) {
+  // 检查边界
+  if (startX < 0 || startY < 0 || startZ < 0 ||
+      startX + lenX > gridLengthX || 
+      startY + lenY > gridWidthY || 
+      startZ + lenZ > gridHeightZ) {
+    return false;
+  }
+  
+  // 检查是否与现有货物碰撞
+  for (let x = startX; x < startX + lenX; x++) {
+    for (let y = startY; y < startY + lenY; y++) {
+      for (let z = startZ; z < startZ + lenZ; z++) {
+        if (occupiedSpace[x][y][z]) {
+          return false; // 空间已被占用
+        }
+      }
+    }
+  }
+  
+  return true;
+}
+
+// 检查货物是否有足够的底部支撑（至少75%的底面积需要支撑）
+function checkHasSupport(occupiedSpace, startX, startY, startZ, lenX, lenY, gridLengthX, gridWidthY, gridHeightZ) {
+  if (startZ === 0) return true; // 地面自动提供支撑
+  
+  const supportThreshold = 0.75; // 至少75%的底面积需要支撑
+  const bottomArea = lenX * lenY;
+  let supportedArea = 0;
+  
+  // 检查底部每个格子是否有支撑
+  for (let x = startX; x < startX + lenX; x++) {
+    for (let y = startY; y < startY + lenY; y++) {
+      // 支撑来自正下方格子
+      if (x >= 0 && x < gridLengthX && y >= 0 && y < gridWidthY && startZ - 1 >= 0) {
+        if (occupiedSpace[x][y][startZ - 1]) {
+          supportedArea++;
+        }
+      }
+    }
+  }
+  
+  const supportRatio = supportedArea / bottomArea;
+  console.log(`支撑检查: 支撑面积比例=${supportRatio.toFixed(2)}, 底面积=${bottomArea}, 被支撑面积=${supportedArea}, 阈值=${supportThreshold}`);
+  return supportRatio >= supportThreshold;
+}
+
+// 标记空间为已占用
+function markSpaceAsOccupied(occupiedSpace, startX, startY, startZ, lenX, lenY, lenZ, gridLengthX, gridWidthY, gridHeightZ) {
+  for (let x = startX; x < startX + lenX && x < gridLengthX; x++) {
+    for (let y = startY; y < startY + lenY && y < gridWidthY; y++) {
+      for (let z = startZ; z < startZ + lenZ && z < gridHeightZ; z++) {
+        occupiedSpace[x][y][z] = true;
+      }
+    }
+  }
+}
+
 // 处理移除货物事件
 const handleRemoveCargo = (idFromPanel) => {
-  // idFromPanel is expected to be a composite key: "originalCargoId::color::colorValue"
+  console.log('[Container.vue] handleRemoveCargo - 收到ID:', idFromPanel);
+  
+  // 简单打印货物列表用于调试
+  console.log(`[Container.vue] 当前货物数量: ${cargoList.value.length}`);
+  
+  // 解析复合ID: originalId::color::colorValue
   const parts = idFromPanel.split('::color::');
-
-  if (parts.length === 2) {
-    const originalIdToRemove = parts[0];
-    const colorToRemove = parts[1];
-
-    const initialCount = cargoList.value.length;
-  cargoList.value = cargoList.value.filter(cargo => {
-    const cargoOriginalId = cargo.id.includes('-inst-') ? cargo.id.split('-inst-')[0] : cargo.id;
-      // Keep if it does NOT match both originalId and color
-      return !(cargoOriginalId === originalIdToRemove && cargo.color === colorToRemove);
-    });
-    const removedCount = initialCount - cargoList.value.length;
-    console.log(`移除了 ${removedCount} 个类型为 '${originalIdToRemove}' 且颜色为 '${colorToRemove}' 的货物实例。剩余 ${cargoList.value.length} 个货物。`);
-  } else {
-    // Fallback or error handling if the ID format is not as expected.
-    // This might happen if an old system part or a different type of item calls this.
-    // For now, log a warning. If necessary, could add old logic here as a fallback.
-    console.warn(`[handleRemoveCargo] 接收到的ID格式不符合预期: ${idFromPanel}。未执行移除操作。`);
-    // Original fallback behavior (removes all instances of an original ID type):
-    // cargoList.value = cargoList.value.filter(cargo => {
-    //   const cargoOriginalId = cargo.id.includes('-inst-') ? cargo.id.split('-inst-')[0] : cargo.id;
-    //   return cargoOriginalId !== idFromPanel;
-    // });
-    // console.log(`移除ID为 ${idFromPanel} 的所有货物后 (回退逻辑)，剩余 ${cargoList.value.length} 个货物`);
+  
+  if (parts.length !== 2) {
+    console.error('[Container.vue] ID格式错误，应为 originalId::color::colorValue 格式');
+    return;
   }
+  
+  const originalIdToRemove = parts[0];
+  const colorToRemove = parts[1];
+  
+  console.log(`[Container.vue] 准备移除 - 原始ID: ${originalIdToRemove}, 颜色: ${colorToRemove}`);
+  
+  // 找到第一个匹配的货物，以获取详细信息
+  const templateCargo = cargoList.value.find(cargo => {
+    let baseId = cargo.id;
+    if (baseId.includes('-inst-')) {
+      baseId = baseId.split('-inst-')[0];
+    }
+    return baseId === originalIdToRemove && cargo.color === colorToRemove;
+  });
+  
+  if (!templateCargo) {
+    console.warn(`[Container.vue] 未找到匹配的货物: 原始ID=${originalIdToRemove}, 颜色=${colorToRemove}`);
+    return;
+  }
+  
+  // 获取要匹配的名称和原始尺寸
+  const matchName = templateCargo.name;
+  const matchLength = templateCargo.originalLength !== undefined ? templateCargo.originalLength : templateCargo.length;
+  const matchWidth = templateCargo.originalWidth !== undefined ? templateCargo.originalWidth : templateCargo.width;
+  const matchHeight = templateCargo.originalHeight !== undefined ? templateCargo.originalHeight : templateCargo.height;
+  
+  console.log(`[Container.vue] 将移除所有 名称=${matchName}, 尺寸=${matchLength}×${matchWidth}×${matchHeight}, 颜色=${colorToRemove} 的货物`);
+  
+  // 移除前数量
+  const beforeCount = cargoList.value.length;
+  
+  // 移除所有匹配的货物实例
+  cargoList.value = cargoList.value.filter(cargo => {
+    // 获取原始尺寸
+    const cargoOriginalLength = cargo.originalLength !== undefined ? cargo.originalLength : cargo.length;
+    const cargoOriginalWidth = cargo.originalWidth !== undefined ? cargo.originalWidth : cargo.width;
+    const cargoOriginalHeight = cargo.originalHeight !== undefined ? cargo.originalHeight : cargo.height;
+    
+    // 检查名称、原始尺寸和颜色是否匹配
+    const isMatching = cargo.name === matchName && 
+                       cargoOriginalLength === matchLength &&
+                       cargoOriginalWidth === matchWidth &&
+                       cargoOriginalHeight === matchHeight &&
+                       cargo.color === colorToRemove;
+    
+    if (isMatching) {
+      console.log(`[Container.vue] 匹配到要移除的货物: ID=${cargo.id}, 名称=${cargo.name}`);
+    }
+    
+    // 保留不匹配的
+    return !isMatching;
+  });
+  
+  // 移除后数量
+  const afterCount = cargoList.value.length;
+  const removedCount = beforeCount - afterCount;
+  
+  console.log(`[Container.vue] 移除了 ${removedCount} 个货物，剩余 ${afterCount} 个`);
 }
 
 // 处理清空所有货物事件
@@ -695,12 +932,41 @@ const appConfig = {
   maxCargosPerBatch: 100,  // 每批次最大货物数量
   maxLoadingAttempts: 5,   // 装载尝试最大次数
 }
+
+// 生成结构化数据并插入到页面
+onMounted(() => {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "集装箱装载模拟器",
+    "applicationCategory": "工具软件",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "description": "高效的集装箱装载模拟和优化工具，帮助您规划货物装载",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "156"
+    },
+    "screenshot": `${config.app?.baseUrl || 'http://goobox.bangzone.net/'}/images/screenshot-container.jpg`
+  };
+  
+  // 创建script元素并插入
+  const script = document.createElement('script');
+  script.setAttribute('type', 'application/ld+json');
+  script.textContent = JSON.stringify(jsonLd);
+  document.head.appendChild(script);
+});
 </script>
 
 <template>
   <div class="container-layout">
     <a-row :gutter="[16, 12]">
-      <a-col :xs="24" :lg="16">
+      <a-col :xs="24" :md="12" :lg="14">
         <div class="scene-container">
           <ContainerScene 
             :cargoList="cargoList" 
@@ -710,8 +976,8 @@ const appConfig = {
           />
         </div>
       </a-col>
-      <a-col :xs="24" :lg="8">
-        <template v-if="isLoggedIn">
+      <a-col :xs="24" :md="12" :lg="10">
+        <template v-if="isLoggedIn || !needRegister">
           <ContainerControlPanel 
             :cargoListForTable="aggregatedCargoListForUITable"
             :loadedCargoStats="loadedCargoStats"

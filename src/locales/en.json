@@ -72,6 +72,7 @@
     "quantity": "Quantity",
     "color": "Color",
     "add": "Add",
+    "edit": "Edit",
     "selectCommonSize": "Select Common Size",
     "analyzing": "Analyzing...",
     "addFailedDescription": "Attempted to add {attempted} items, successfully loaded {added}.",
@@ -131,6 +132,7 @@
     "validateFormFailed": "Please fill in complete cargo information",
     "addSuccess": "Cargo added successfully!",
     "partialAddSuccess": "Some cargo items were added successfully",
+    "selectColor": "Select Color",
     "addFailed": "Failed to add cargo",
     "quantityAndColor": "Quantity and Color",
     "loadedCargo": "Loaded Cargo ({count} items)",
@@ -149,6 +151,11 @@
     "exportComplete": "Report export completed",
     "exportFailed": "Report export failed",
     "exportTimeout": "Export timed out, please try again",
+    "confirmRemove": "Are you sure you want to remove this cargo?",
+    "confirmRemoveContent": "This action cannot be undone, please confirm if you want to proceed",
+    "removeSuccess": "Cargo removed successfully",
+    "removeFailed": "Cargo removal failed",
+    "confirm": "Confirm",
     "cancel": "Cancel",
     "close": "Close",
     "sizeApplied": "Size applied",
@@ -188,7 +195,7 @@
       "exportingReport": "Exporting...",
       "exportSuccess": "Report exported successfully",
       "exportFailed": "Failed to export report",
-      "preparingData": "Preparing data...",
+
       "processingData": "Processing data...",
       "generatingPDF": "Generating PDF...",
       "exportCompleted": "Export completed",
@@ -198,7 +205,6 @@
       "timeout": "Operation timed out and was cancelled automatically",
       "confirmCancel": "Are you sure you want to cancel the export?",
       "cargoListSimplified": "Cargo List (Simplified)",
-      "processingImage": "Processing image...",
       "featureDisabled": "Feature Temporarily Disabled",
       "featureDisabledDesc": "Export report feature is temporarily disabled, please try again later"
     }
@@ -210,6 +216,7 @@
     "projectDescriptionText": "Container Loading Simulator is a tool designed for logistics and supply chain professionals to help optimize loading plans and improve efficiency. The system uses advanced 3D visualization technology and intelligent algorithms to provide intuitive and efficient loading planning solutions.",
     "contact": "Contact",
     "donation": "Support the Project",
+    "donationPurpose": "Your donation will be used for: server costs, core developer stipends, documentation optimization",
     "donationDescription": "While we promise that this system will always be free to use, maintaining and developing new features requires resources. If you find this project helpful, please consider supporting us to continue improving it through the following methods.",
     "donationMethodPaypal": "Donate via PayPal",
     "donationMethodCrypto": "Donate with Cryptocurrency",
@@ -374,6 +381,12 @@
       "loginFailed": "Login failed, please check your credentials or try again later.",
       "registerSuccess": "Registration successful and automatically logged in!",
       "registerFailed": "Registration failed, please try again later."
+    }
+  },
+  "cargoAdd": {
+    "error": {
+      "containerNotFound": "Container type details not found",
+      "dimensionsMissing": "Invalid cargo dimensions"
     }
   }
 } 

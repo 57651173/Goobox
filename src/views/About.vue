@@ -21,8 +21,8 @@
                 <img src="@/assets/images/pay-alipay.png" alt="Alipay">
               </div>
             </div>
+            <p>{{ t('about.donationPurpose') }}</p>
           </div>
-          
           <div class="donation-method">
             <div class="donation-custom">
               <div class="donation-contact">
