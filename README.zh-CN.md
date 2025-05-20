@@ -2,7 +2,7 @@
 
 一个基于 Vue 3 和 Three.js 构建的3D集装箱装载模拟系统，帮助用户优化集装箱空间利用率和货物装载计划。
 
-[English](./README.md)
+[English](./README.md) | [日本語](./README.ja.md) | [Deutsch](./README.de.md)
 
 ## 功能特点
 
@@ -52,17 +52,7 @@ yarn build
 
 构建完成后，生成的静态文件将会在 `dist` 目录中。
 
-## 开发指南
 
-### 推荐的IDE设置
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (并禁用 Vetur)。
-
-### 代码风格检查
-
-```sh
-yarn lint
-```
 
 ## 国际化 (i18n)
 
@@ -102,7 +92,6 @@ app.use(i18n)
 ├── public/            # 静态资源目录
 ├── src/               # 源代码
 │   ├── assets/        # 静态资源文件
-│   ├── components/    # 通用组件
 │   │   ├── container/ # 集装箱相关组件
 │   │   ├── home/      # 首页相关组件
 │   │   └── icons/     # 图标组件
