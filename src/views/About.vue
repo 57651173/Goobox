@@ -28,7 +28,7 @@
               <div class="donation-contact">
                 <div class="custom-contact-item">
                   <img src="@/assets/images/wechat.png" alt="WeChat">
-                  <p>WeChat: <a href="https://weixin.qq.com" target="_blank">Stoney1108</a></p>
+                  <p>WeChat: <a href="javascript:void(0)">Stoney1108</a></p>
                 </div>
               </div>
               <h3>{{ t('about.customContactDescription') }}</h3>
@@ -144,12 +144,13 @@ const donateAmount = (amount) => {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  height: 100%;
   gap: 30px;
 }
 
 .donation-pay-item img{
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   padding: 20px;
 
 }
