@@ -12,7 +12,7 @@
             <div class="feature-card" @mouseenter="activeTab = index" :class="{ 'active': activeTab === index }">
               <div class="card-pattern"></div>
               <div class="feature-icon">
-                <a-icon :type="feature.icon" />
+                <component :is="feature.iconComponent" />
               </div>
               <h3 class="feature-title">{{ feature.title }}</h3>
               <div class="feature-line"></div>
@@ -28,6 +28,14 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { ref, computed } from 'vue'
+import {
+  ContainerOutlined,
+  ApartmentOutlined,
+  FundOutlined,
+  BarChartOutlined,
+  SaveOutlined,
+  CheckCircleOutlined // 默认/备用图标
+} from '@ant-design/icons-vue';
 
 defineProps({
   show: {
@@ -39,8 +47,18 @@ defineProps({
 const { t } = useI18n()
 const activeTab = ref(0)
 
-// 特性图标
-const featureIcons = [
+// 将图标字符串映射到实际的组件
+const iconComponents = {
+  container: ContainerOutlined,
+  apartment: ApartmentOutlined,
+  fund: FundOutlined,
+  'bar-chart': BarChartOutlined, // 注意 kebab-case
+  save: SaveOutlined,
+  'check-circle': CheckCircleOutlined // 默认图标
+};
+
+// 特性图标名称 (保持字符串，用于映射)
+const featureIconNames = [
   'container', 'apartment', 'fund', 'bar-chart', 'save'
 ]
 
@@ -56,10 +74,11 @@ const featureKeys = [
 // 特性列表
 const features = computed(() => {
   return featureKeys.map((key, index) => {
+    const iconName = featureIconNames[index] || 'check-circle';
     return {
       title: t(`home.featuresList.${key}.title`),
       description: t(`home.featuresList.${key}.description`),
-      icon: featureIcons[index] || 'check-circle'
+      iconComponent: iconComponents[iconName] || CheckCircleOutlined // 获取对应的组件
     }
   })
 })

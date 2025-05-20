@@ -1,9 +1,14 @@
 @import './base.css';
+@import './theme-vars.css';
 
 /* 全局样式 */
 html, body {
   width: 100%;
   overflow-x: hidden;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  scroll-behavior: smooth;
 }
 
 #app {
@@ -12,6 +17,52 @@ html, body {
   padding: 0;
   font-weight: normal;
   overflow-x: hidden;
+}
+
+/* 通用样式 */
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+}
+
+.card {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-6);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn {
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--primary-color) 85%, black);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: color-mix(in srgb, var(--secondary-color) 85%, black);
 }
 
 /* 修复Ant Design组件 */
@@ -25,27 +76,83 @@ html, body {
   box-sizing: border-box;
 }
 
+.ant-layout-header{
+  overflow: hidden;
+  background-color: var(--bg-header) !important;
+}
+
+.ant-layout-footer {
+  background-color: var(--bg-footer) !important;
+  color: var(--text-secondary);
+}
+
+.ant-btn {
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+}
+
+.ant-card {
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+.ant-tag {
+  border-radius: var(--border-radius-sm);
+}
+
+.ant-input, .ant-select-selector, .ant-input-number {
+  border-radius: var(--border-radius-md) !important;
+}
+
 /* Ant Design响应式布局修复 */
 @media (max-width: 768px) {
   .ant-col {
     flex: 0 0 100%;
     max-width: 100%;
   }
+  
+  .container {
+    padding: 0 var(--spacing-4);
+  }
+  
+  .card {
+    padding: var(--spacing-4);
+  }
 }
 
 /* 链接样式 */
-a,
-.green {
+a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+  color: var(--primary-color);
+  transition: var(--transition-fast);
   padding: 3px;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    background-color: var(--bg-button-hover);
+    border-radius: var(--border-radius-sm);
   }
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
 }
 
 @media (min-width: 1024px) {

@@ -1,55 +1,38 @@
 <template>
   <div class="about-container">
     <div class="about-content">
-      <h1 class="page-title">{{ t('about.title') }}</h1>
-      
-      <div class="about-section">
-        <h2>{{ t('about.version') }}</h2>
-        <p>1.0.0 Beta</p>
-      </div>
       
       <div class="about-section">
         <h2>{{ t('about.projectDescription') }}</h2>
         <p>{{ t('about.projectDescriptionText') }}</p>
       </div>
-      
-      <div class="about-section">
-        <h2>{{ t('about.contact') }}</h2>
-        <p>Email: support@goobox.com</p>
-        <p>GitHub: <a href="https://github.com/goobox" target="_blank">github.com/goobox</a></p>
-      </div>
-      
+    
       <div class="about-section donation-section">
         <h2>{{ t('about.donation') }}</h2>
         <p>{{ t('about.donationDescription') }}</p>
         
         <div class="donation-methods">
           <div class="donation-method">
-            <a-icon type="credit-card" class="donation-icon" />
-            <h3>{{ t('about.donationMethodPaypal') }}</h3>
-            <a-button type="primary" href="https://paypal.me/goobox" target="_blank">
-              PayPal
-            </a-button>
+            <div class="donation-pay-methods">
+              <div class="donation-pay-item pay-wechat">
+                <img src="@/assets/images/pay-wechat.png" alt="WeChatPay">
+              </div>
+              <div class="donation-pay-item pay-alipay">
+                <img src="@/assets/images/pay-alipay.png" alt="Alipay">
+              </div>
+            </div>
           </div>
           
           <div class="donation-method">
-            <a-icon type="wallet" class="donation-icon" />
-            <h3>{{ t('about.donationMethodCrypto') }}</h3>
-            <div class="crypto-addresses">
-              <p><strong>BTC:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
-              <p><strong>ETH:</strong> 0x742d35Cc6634C0532925a3b844Bc454e4438f44e</p>
+            <div class="donation-custom">
+              <div class="donation-contact">
+                <div class="custom-contact-item">
+                  <img src="@/assets/images/wechat.png" alt="WeChat">
+                  <p>WeChat: <a href="https://weixin.qq.com" target="_blank">Stoney1108</a></p>
+                </div>
+              </div>
+              <h3>{{ t('about.customContactDescription') }}</h3>
             </div>
-          </div>
-        </div>
-        
-        <div class="donation-tiers">
-          <h3>{{ t('about.donationTiers') }}</h3>
-          <div class="tier-buttons">
-            <a-button class="tier-button" @click="donateAmount(5)">$5</a-button>
-            <a-button class="tier-button" @click="donateAmount(10)">$10</a-button>
-            <a-button class="tier-button" @click="donateAmount(20)">$20</a-button>
-            <a-button class="tier-button" @click="donateAmount(50)">$50</a-button>
-            <a-button class="tier-button" @click="donateAmount(100)">$100</a-button>
           </div>
         </div>
       </div>
@@ -156,6 +139,27 @@ const donateAmount = (amount) => {
   border: 1px solid #e6f7ff;
 }
 
+.donation-pay-methods{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.donation-pay-item img{
+  width: 160px;
+  height: 160px;
+  padding: 20px;
+
+}
+.custom-contact-item img{
+  width: 160px;
+  height: 160px;
+  padding: 6px;
+  background-color: #faebd7;
+}
+
 .donation-methods {
   display: flex;
   flex-wrap: wrap;
@@ -177,10 +181,22 @@ const donateAmount = (amount) => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+.donation-custom-item{
+  text-align: left;
+}
+
 .donation-icon {
   font-size: 36px;
   color: #1890ff;
   margin-bottom: 16px;
+}
+
+.pay-wechat{
+  background-color: #07C160;
+}
+
+.pay-alipay{
+  background-color: #1777FF;
 }
 
 .crypto-addresses {

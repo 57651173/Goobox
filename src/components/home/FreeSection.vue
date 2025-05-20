@@ -10,7 +10,7 @@
           <a-col :span="24" :md="8">
             <div class="free-feature-card">
               <div class="free-feature-icon">
-                <a-icon type="github" theme="filled" />
+                <GithubFilled />
               </div>
               <h3 class="free-feature-title">{{ t('home.solemnPromise') }}</h3>
               <p class="free-feature-desc">{{ t('home.alwaysFreeDesc') }}</p>
@@ -19,7 +19,7 @@
           <a-col :span="24" :md="8">
             <div class="free-feature-card">
               <div class="free-feature-icon">
-                <a-icon type="check-circle" theme="filled" />
+                <CheckCircleFilled />
               </div>
               <h3 class="free-feature-title">{{ t('home.freeForever') }}</h3>
               <p class="free-feature-desc">{{ t('home.alwaysFreeDesc') }}</p>
@@ -28,7 +28,7 @@
           <a-col :span="24" :md="8">
             <div class="free-feature-card">
               <div class="free-feature-icon">
-                <a-icon type="dollar" theme="filled" />
+                <DollarCircleFilled />
               </div>
               <h3 class="free-feature-title">{{ t('home.noHiddenFees') }}</h3>
               <p class="free-feature-desc">{{ t('home.alwaysFreeDesc') }}</p>
@@ -48,6 +48,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
+import { GithubFilled, CheckCircleFilled, DollarCircleFilled } from '@ant-design/icons-vue'
 
 defineProps({
   show: {
