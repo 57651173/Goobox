@@ -82,30 +82,6 @@ const i18n = createI18n({
 app.use(i18n)
 ```
 
-3. Die Anwendung bietet in der oberen rechten Ecke einen Sprachauswähler, mit dem Benutzer die Sprache einfach wechseln können.
-
-## Projektstruktur
-
-```
-├── public/            # Verzeichnis für statische Ressourcen
-├── src/               # Quellcode
-│   ├── assets/        # Statische Asset-Dateien
-│   │   ├── container/ # Container-bezogene Komponenten
-│   │   ├── home/      # Homepage-bezogene Komponenten
-│   │   └── icons/     # Icon-Komponenten
-│   ├── config/        # Globale Konfiguration
-│   ├── locales/       # Internationalisierungs-Sprachdateien
-│   ├── router/        # Router-Konfiguration
-│   ├── views/         # Seitenansichten
-│   ├── App.vue        # Haupt-Anwendungskomponente
-│   └── main.js        # Anwendungs-Einstiegspunkt
-├── index.html         # HTML-Vorlage
-├── vite.config.js     # Vite-Konfiguration
-├── .eslintrc.js       # ESLint-Konfiguration
-├── package.json       # Projektabhängigkeiten
-└── README.md          # Projektdokumentation
-```
-
 ## Richtlinien für Beiträge
 
 Wir begrüßen alle Formen von Beiträgen, einschließlich, aber nicht beschränkt auf:

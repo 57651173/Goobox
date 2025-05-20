@@ -84,29 +84,6 @@ const i18n = createI18n({
 app.use(i18n)
 ```
 
-3. 应用右上角提供语言选择器，用户可以方便地切换语言。
-
-## 项目结构
-
-```
-├── public/            # 静态资源目录
-├── src/               # 源代码
-│   ├── assets/        # 静态资源文件
-│   │   ├── container/ # 集装箱相关组件
-│   │   ├── home/      # 首页相关组件
-│   │   └── icons/     # 图标组件
-│   ├── config/        # 全局配置
-│   ├── locales/       # 国际化语言文件
-│   ├── router/        # 路由配置
-│   ├── views/         # 页面视图
-│   ├── App.vue        # 主应用组件
-│   └── main.js        # 应用入口
-├── index.html         # HTML模板
-├── vite.config.js     # Vite配置
-├── .eslintrc.js       # ESLint配置
-├── package.json       # 项目依赖
-└── README.md          # 项目文档
-```
 
 
 ## 贡献指南
